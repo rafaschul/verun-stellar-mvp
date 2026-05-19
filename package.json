@@ -1,0 +1,20 @@
+{
+  "name": "verun-stellar-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Verun MVP on Stellar Testnet (3 validators, 2-of-3 consensus)",
+  "main": "src/api.js",
+  "scripts": {
+    "check": "node scripts/check.js",
+    "selftx": "node scripts/selftx.js",
+    "fund": "node scripts/fund.js",
+    "evaluate": "node src/evaluate.js",
+    "api": "node src/api.js",
+    "genkey": "node scripts/genkey.js"
+  },
+  "dependencies": {
+    "@stellar/stellar-sdk": "^15.0.1",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2"
+  }
+}
