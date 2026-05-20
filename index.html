@@ -907,7 +907,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
         </div>
         <button onclick="copyAgentPrompt()" id="copy-btn" style="font-family:var(--sans);font-size:12px;font-weight:700;padding:6px 16px;border-radius:8px;border:1px solid var(--teal-border);background:var(--teal-dim);color:var(--teal);cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0">Copy Command</button>
       </div>
-      <pre id="agent-prompt-text" style="margin:0;padding:24px 26px;font-family:var(--mono);font-size:13px;line-height:1.75;color:var(--text2);white-space:pre-wrap;word-break:break-word;overflow-x:auto">curl -s -X POST https://erster.fund/api/evaluate \
+      <pre id="agent-prompt-text" style="margin:0;padding:24px 26px;font-family:var(--mono);font-size:13px;line-height:1.75;color:var(--text2);white-space:pre-wrap;word-break:break-word;overflow-x:auto">curl -s -X POST https://www.erster.fund/api/evaluate \
   -H "Content-Type: application/json" \
   -d '{"agentId":"agt_openclaw_01","score":720,"operation":"transfer"}' | \
 python3 -c "

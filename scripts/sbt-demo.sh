@@ -10,7 +10,7 @@ set -euo pipefail
 
 AGENT="${1:-agt_fahad_001}"
 SCORE="${2:-720}"
-BASE="${BASE:-https://erster.fund}"
+BASE="${BASE:-https://www.erster.fund}"
 
 green() { printf '\033[0;32m%s\033[0m' "$1"; }
 red()   { printf '\033[0;31m%s\033[0m' "$1"; }
@@ -26,14 +26,14 @@ echo
 
 # ─── 1. PRE-CHECK STATUS ────────────────────────────────────────────
 echo "[1/5] $(amber 'Checking current credential status...')"
-PRE=$(curl -s "$BASE/api/sbt-status?agentId=$AGENT")
+PRE=$(curl -sL "$BASE/api/sbt-status?agentId=$AGENT")
 PRE_CRED=$(echo "$PRE" | python3 -c "import sys,json;print(json.load(sys.stdin).get('credentialed',False))" 2>/dev/null || echo "false")
 echo "      Credentialed before mint: $PRE_CRED"
 echo
 
 # ─── 2. MINT ────────────────────────────────────────────────────────
 echo "[2/5] $(amber 'Minting VTRUST credential under protocol authority...')"
-MINT=$(curl -s -X POST "$BASE/api/mint-sbt" \
+MINT=$(curl -sL -X POST "$BASE/api/mint-sbt" \
   -H "Content-Type: application/json" \
   -d "{\"agentId\":\"$AGENT\",\"score\":$SCORE,\"operation\":\"transfer\"}")
 
@@ -61,14 +61,14 @@ echo
 # ─── 3. PUBLIC VERIFICATION ─────────────────────────────────────────
 echo "[3/5] $(amber 'Public verification (anyone, no auth required)...')"
 echo "        \$ curl $VERIFY"
-RAW=$(curl -s "$VERIFY" || echo '{"value":null}')
+RAW=$(curl -sL "$VERIFY" || echo '{"value":null}')
 VAL=$(echo "$RAW" | python3 -c "import sys,json,base64;d=json.load(sys.stdin);v=d.get('value');print(base64.b64decode(v).decode() if v else '(empty)')" 2>/dev/null || echo "(unparseable)")
 green "      → on-chain credential = $VAL"; echo
 echo
 
 # ─── 4. REVOKE (kill-switch) ────────────────────────────────────────
 echo "[4/5] $(amber 'Simulating MiFID II kill-switch — revoking credential...')"
-REV=$(curl -s -X POST "$BASE/api/revoke-sbt" \
+REV=$(curl -sL -X POST "$BASE/api/revoke-sbt" \
   -H "Content-Type: application/json" \
   -d "{\"agentId\":\"$AGENT\",\"reason\":\"demo_kill_switch\"}")
 
@@ -89,7 +89,7 @@ echo
 # ─── 5. POST-REVOKE VERIFICATION ────────────────────────────────────
 echo "[5/5] $(amber 'Re-verifying after revoke...')"
 sleep 2
-POST=$(curl -s "$BASE/api/sbt-status?agentId=$AGENT")
+POST=$(curl -sL "$BASE/api/sbt-status?agentId=$AGENT")
 POST_CRED=$(echo "$POST" | python3 -c "import sys,json;print(json.load(sys.stdin).get('credentialed',False))")
 if [ "$POST_CRED" = "False" ]; then
   green "      ✓ Credential cleared on-chain — kill-switch confirmed"; echo

@@ -12,7 +12,7 @@ You are an AI agent operating within the Verun Network trust framework on Stella
 Before executing any financial operation, request a Verun trust evaluation.
 
 == HOW TO EVALUATE ==
-POST https://erster.fund/api/evaluate
+POST https://www.erster.fund/api/evaluate
 Body: { "agentId": "YOUR_AGENT_ID", "score": YOUR_SCORE, "operation": "transfer" }
 
 == OPERATION GATES ==
@@ -41,7 +41,7 @@ Docs: https://erster.fund/docs.html
 ### Evaluate Agent
 
 ```bash
-curl -X POST https://erster.fund/api/evaluate \
+curl -X POST https://www.erster.fund/api/evaluate \
   -H "Content-Type: application/json" \
   -d '{"agentId":"agt_my_agent","score":820,"operation":"transfer"}'
 ```
@@ -67,7 +67,7 @@ curl -X POST https://erster.fund/api/evaluate \
 ### Health Check
 
 ```bash
-curl https://erster.fund/api/health
+curl https://www.erster.fund/api/health
 ```
 
 ---
