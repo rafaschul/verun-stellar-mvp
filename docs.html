@@ -486,8 +486,8 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   <h2>Testnet Validators (Prototype)</h2>
   <div class="v-grid">
     <div class="v-card">
-      <div class="v-card-title">BCP Partners GmbH</div>
-      <div class="v-card-body">Founding Validator. Score-based consensus node operated by BCP Partners. Enforces Verun score tiers and operation gates. EU-based. Contact: <a href="https://www.bcpp.io" target="_blank">bcpp.io</a></div>
+      <div class="v-card-title">ERSTER</div>
+      <div class="v-card-body">Founding Validator. EU tokenization platform · score-based consensus node operated by <a href="https://www.bcpp.io" target="_blank">BCP Partners GmbH</a>, Berlin. Enforces Verun score tiers and operation gates. EU-based.</div>
       <span class="v-badge">Founding · Active</span>
     </div>
     <div class="v-card">
@@ -537,8 +537,8 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
     <pre><code class="language-json">{
   "validators": [
     {
-      "id": "val-bcp-01",
-      "name": "BCP Partners",
+      "id": "val-erster-01",
+      "name": "ERSTER",
       "type": "internal",
       "status": "active",
       "policy": "score_based"
@@ -574,7 +574,7 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   "agentId": "agt_demo",
   "score": 820,
   "operation": "transfer",
-  "validatorIds": ["val-bcp-01", "val-tokenforge-02", "val-test-03"]
+  "validatorIds": ["val-erster-01", "val-tokenforge-02", "val-test-03"]
 }</code></pre>
   </div>
   <div class="code-block">
@@ -586,12 +586,12 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
     "score": 820,
     "operation": "transfer",
     "validators_used": [
-      { "id": "val-bcp-01", "name": "BCP Partners" },
+      { "id": "val-erster-01", "name": "ERSTER" },
       { "id": "val-tokenforge-02", "name": "tokenforge" },
       { "id": "val-test-03", "name": "Test Validator" }
     ],
     "votes": [
-      { "validatorId": "val-bcp-01", "vote": "LOW", "reason": "score_800+", "source": "val-bcp-01" },
+      { "validatorId": "val-erster-01", "vote": "LOW", "reason": "score_800+", "source": "val-erster-01" },
       { "validatorId": "val-tokenforge-02", "vote": "LOW", "reason": "chain_api_gate_passed_transfer:820>=500", "gate": { "permitted": true } },
       { "validatorId": "val-test-03", "vote": "LOW", "reason": "score_800+", "source": "val-test-03" }
     ],
@@ -657,7 +657,7 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   "operation": "transfer",
   "consensus": "LOW",
   "permitted": true,
-  "validators": ["val-bcp-01", "val-tokenforge-02", "val-test-03"],
+  "validators": ["val-erster-01", "val-tokenforge-02", "val-test-03"],
   "ts": "2026-04-20T09:33:09.734Z"
 }</code></pre>
   </div>
@@ -836,7 +836,7 @@ cd verun-stellar-mvp &amp;&amp; chmod +x scripts/sbt-demo.sh
       <div class="tl-body">
         <div class="tl-period active">April 2026 — Prototype</div>
         <div class="tl-title">Stellar Testnet Prototype + Soulbound Tokens</div>
-        <div class="tl-desc">10 API endpoints implemented on Stellar Testnet. BCP Partners + tokenforge (exploratory) + Test validators in a 2-of-3 consensus arrangement. On-chain anchor via Memo Transactions. <strong>SBT mint + revoke + status + list</strong> working via protocol-custodial manageData design. Friendbot auto-funding. Non-blocking design.</div>
+        <div class="tl-desc">10 API endpoints implemented on Stellar Testnet. ERSTER + tokenforge (exploratory) + Test validators in a 2-of-3 consensus arrangement. On-chain anchor via Memo Transactions. <strong>SBT mint + revoke + status + list</strong> working via protocol-custodial manageData design. Friendbot auto-funding. Non-blocking design.</div>
         <div class="tl-chips">
           <span class="chip">/evaluate</span>
           <span class="chip">/mint-sbt</span>
@@ -938,7 +938,7 @@ If verdict is denied or pending, notify the human supervisor.
 Never execute financial operations without a valid Verun verdict.
 
 Network: Stellar Testnet
-Validators: tokenforge · BCP Partners
+Validators: tokenforge · ERSTER
 Docs: https://erster.fund/docs.html</pre>
   </div>
 

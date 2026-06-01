@@ -1,9 +1,9 @@
 [
   {
-    "id": "val-bcp-01",
-    "name": "BCP Partners",
+    "id": "val-erster-01",
+    "name": "ERSTER",
     "type": "internal",
-    "description": "BCP Partners GmbH — Founding Validator. MiFID II Art. 17 + EU AI Act Art. 14 compliance node. Enforces Verun score tiers and operation gates.",
+    "description": "ERSTER — Founding Validator. EU tokenization platform operated by BCP Partners GmbH, Berlin. Score-based consensus node. Enforces Verun score tiers and operation gates.",
     "status": "active",
     "policy": "score_based",
     "weight": 1,

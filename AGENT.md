@@ -30,7 +30,7 @@ If verdict is denied or pending, notify the human supervisor.
 Never execute financial operations without a valid Verun verdict.
 
 Network: Stellar Testnet
-Validators: BCP Partners + 2 others (testnet prototype)
+Validators: tokenforge · ERSTER (+ Test slot)
 Docs: https://erster.fund/docs.html
 ```
 
@@ -103,7 +103,7 @@ Every evaluation is anchored as a **Memo Transaction on Stellar Testnet**: a 1-s
 
 | Name | Type | Notes |
 |------|------|-------|
-| BCP Partners | Internal | Score-based |
+| ERSTER | Internal | Score-based |
 | External Validator (TBD) | External | Chain API gate — integration exploratory |
 | Test Validator | Testnet only | Score-based |
 
