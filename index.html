@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Erster — The Trust ID for Agentic Finance</title>
+<title>Verun — The Trust ID for Agentic Finance · Stellar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -64,18 +64,23 @@ a{color:var(--teal);text-decoration:none}
 .nav-links{display:flex;align-items:center;gap:32px}
 .nav-links a{font-size:14px;font-weight:500;color:var(--text2);transition:color 0.2s}
 .nav-links a:hover{color:var(--teal)}
-.stellar-badge{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:var(--teal);background:#dcfce7;border:0;padding:7px 14px;border-radius:20px;font-family:var(--mono);letter-spacing:0.04em}
-.stellar-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+.algo-badge{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:var(--teal);background:#dcfce7;border:0;padding:7px 14px;border-radius:20px;font-family:var(--mono);letter-spacing:0.04em}
+.algo-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.5)}}
 
 /* HERO */
-.hero{padding:80px 0 30px;position:relative;overflow:visible;background:#ffffff}
-.hero-inner{position:relative;display:grid;grid-template-columns:0.95fr 1.05fr;grid-template-areas:"phone copy";align-items:start;gap:0;padding-bottom:0}
+/* Hero — soft lavender-grey base (var(--bg2)); brand green reserved for ERSTER finale section */
+.hero{padding:80px 0 0;position:relative;overflow:visible;background:var(--bg)}
+/* Hide Demo section on mobile only (visible on tablet/desktop) */
+@media(max-width:760px){#demo{display:none !important}}
+/* Phone overflows into next white section for visual depth */
+.hero-phone-wrap{margin-bottom:0}
+.hero-inner{position:relative;display:grid;grid-template-columns:0.95fr 1.05fr;grid-template-areas:"phone copy";align-items:center;gap:0;padding-bottom:0}
 .hero-copy{text-align:left;padding-bottom:0;align-self:center;grid-area:copy}
 .hero h1{font-size:clamp(40px,4.5vw,60px);font-weight:800;line-height:1.04;color:var(--text);margin-bottom:24px;letter-spacing:-0.03em}
 .hero h1 .hl{color:var(--text)}
 .hero h1 .muted{color:#8898aa;font-weight:600}
-.hero-sub{font-size:20px;color:var(--text2);max-width:520px;margin:8px 0 32px;line-height:1.55;font-weight:400;letter-spacing:-0.004em}
+.hero-sub{font-size:20px;color:var(--text2);max-width:540px;margin:8px 0 32px;line-height:1.55;font-weight:400;letter-spacing:-0.004em}
 .hero-sub strong{color:inherit;font-weight:700}
 .hero-btns{display:flex;justify-content:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:0;margin-top:24px}
 .hero-flags{display:flex;justify-content:flex-start;gap:14px;flex-wrap:wrap;align-items:center;margin:0 0 8px}
@@ -92,47 +97,59 @@ a{color:var(--teal);text-decoration:none}
 .pill-amber{background:var(--amber-dim);color:var(--amber);border-color:rgba(217,119,6,0.25)}
 
 /* HERO PHONE — iPhone 15 Pro style mockup showing live demo content (overflows into white section) */
-.hero-phone-wrap{display:flex;justify-content:center;align-items:flex-start;padding:0;position:relative;margin-bottom:-20px;z-index:5;grid-area:phone}
+.hero-phone-wrap{display:flex;justify-content:flex-start;align-items:center;padding:0;position:relative;margin-bottom:0;z-index:5;grid-area:phone}
 .hero-phone{
-  width:340px;height:680px;
+  width:228px;height:456px;
   background:#0a2540;
-  border-radius:54px;padding:8px;
-  /* Reference exact shadow: subtle ring + dark shadow + green ambient glow */
-  /* Apple-style layered shadow on white bg — neutral dark, no green tint */
+  border-radius:43px;padding:6px;
   box-shadow:
-    0 0 0 1.5px rgba(74,81,96,0.35),
-    0 2px 6px rgba(15,23,42,0.05),
-    0 12px 24px rgba(15,23,42,0.07),
-    0 28px 56px rgba(15,23,42,0.10),
-    0 56px 100px rgba(15,23,42,0.10);
+    0 0 0 1.2px rgba(74,81,96,0.35),
+    0 2px 5px rgba(15,23,42,0.05),
+    0 10px 19px rgba(15,23,42,0.07),
+    0 22px 45px rgba(15,23,42,0.10),
+    0 45px 80px rgba(15,23,42,0.10);
   position:relative;
 }
-.hero-phone::before{content:'';position:absolute;right:-2px;top:160px;width:4px;height:60px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
-.hero-phone::after{content:'';position:absolute;left:-2px;top:118px;width:4px;height:34px;background:linear-gradient(270deg,#1a1f2a,#4a5160);border-radius:3px 0 0 3px;box-shadow:0 52px 0 #4a5160,0 100px 0 #4a5160}
-.hero-phone-island{position:absolute;left:50%;top:14px;transform:translateX(-50%);width:78px;height:22px;background:#000;border-radius:14px;z-index:5}
-.hero-phone-screen{position:relative;width:100%;height:100%;background:#fff;border-radius:46px;overflow:hidden;isolation:isolate}
+.hero-phone::before{content:'';position:absolute;right:-2px;top:128px;width:4px;height:48px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
+.hero-phone::after{content:'';position:absolute;left:-2px;top:94px;width:4px;height:27px;background:linear-gradient(270deg,#1a1f2a,#4a5160);border-radius:3px 0 0 3px;box-shadow:0 42px 0 #4a5160,0 80px 0 #4a5160}
+.hero-phone-island{position:absolute;left:50%;top:11px;transform:translateX(-50%);width:62px;height:18px;background:#000;border-radius:12px;z-index:5}
+.hero-phone-screen{position:relative;width:100%;height:100%;background:#f8f9fe;border-radius:37px;overflow:hidden;isolation:isolate;display:flex;flex-direction:column}
+/* iPhone status bar (time + WiFi + battery) — sits at very top, island overlaps */
+.hp-status-bar{background:#fff;padding:11px 19px 6px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;min-height:28px;font-family:-apple-system,'SF Pro Text',Inter,sans-serif;flex-shrink:0}
+.hp-time{font-size:12px;font-weight:600;color:#000;letter-spacing:-0.01em}
+.hp-status-icons{display:flex;align-items:center;gap:4px;color:#000}
+.hp-status-icons svg{display:block}
+/* Safari browser bar (URL pill: verun.network) */
+.hp-safari-bar{background:#fff;padding:5px 10px 8px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(0,0,0,0.06);flex-shrink:0}
+.hp-safari-url{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:#f1f3f6;border-radius:8px;padding:5px 10px;font-size:10.5px;color:#1c1c1e;font-weight:500;font-family:-apple-system,'SF Pro Text',Inter,sans-serif}
+.hp-safari-url svg{width:9px;height:9px;color:#6b6b70;flex-shrink:0}
 /* Hero phone content — native HTML/CSS (replaces hero-phone-screen.png) */
-.hp-content{position:absolute;top:50px;left:0;right:0;bottom:0;padding:0 22px;display:flex;flex-direction:column;gap:14px;font-family:var(--sans);overflow:hidden}
-.hp-nav{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
-.hp-back{font-family:var(--mono);font-size:12px;color:#94a3b8;font-weight:500}
-.hp-counter{font-family:var(--mono);font-size:12px;color:#94a3b8;font-weight:500}
-.hp-next{font-family:var(--mono);font-size:12px;font-weight:600;background:var(--teal);color:#fff;padding:7px 14px;border-radius:20px;display:inline-flex;align-items:center;gap:2px}
+.hp-content{position:relative;flex:1;padding:10px 16px 0;display:flex;flex-direction:column;gap:10px;font-family:var(--sans);overflow:hidden}
+.hp-nav{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:3px;flex-wrap:nowrap}
+.hp-back{font-family:var(--sans);font-size:10.5px;color:#94a3b8;font-weight:600;white-space:nowrap}
+.hp-counter{font-family:var(--sans);font-size:10.5px;color:#94a3b8;font-weight:600;white-space:nowrap;text-align:center;flex:1}
+.hp-next{font-family:var(--sans);font-size:10.5px;font-weight:700;background:var(--teal);color:#fff;padding:5px 10px;border-radius:16px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap}
+@media(max-width:380px){
+  .hp-counter{display:none}
+}
 .hp-steps{display:flex;align-items:center;gap:4px;padding:0 4px}
 .hp-step-dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:600;flex-shrink:0}
 .hp-step-dot.active{background:var(--teal);color:#fff}
 .hp-step-dot.inactive{background:#fff;border:1px solid #e2e8f0;color:#94a3b8}
 .hp-step-line{flex:1;height:1px;background:#e2e8f0}
 .hp-step-label{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--teal);letter-spacing:0.06em;margin-top:4px}
-.hp-title{font-size:15px;font-weight:700;color:#0f172a;letter-spacing:-0.01em;line-height:1.3;margin-top:-6px}
-.hp-card{background:#f1f5f9;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:3px}
-.hp-card-label{font-family:var(--mono);font-size:9px;font-weight:600;color:#94a3b8;letter-spacing:0.08em}
-.hp-card-value{font-family:var(--mono);font-size:11.5px;color:#0f172a;font-weight:500}
-.hp-checks{display:flex;flex-direction:column;gap:8px;margin-top:6px}
-.hp-check{display:flex;align-items:flex-start;gap:8px;font-family:var(--mono);font-size:10.5px;color:#475569;line-height:1.35}
-.hp-tick{width:14px;height:14px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;flex-shrink:0;margin-top:1px}
+.hp-title{font-family:var(--sans);font-size:20px;font-weight:800;color:#0f172a;letter-spacing:-0.025em;line-height:1.15;margin-top:5px}
+.hp-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:11px 13px;display:flex;flex-direction:column;gap:4px}
+.hp-card-label{font-family:var(--sans);font-size:10px;font-weight:800;color:#94a3b8;letter-spacing:0.12em}
+.hp-card-value{font-family:var(--sans);font-size:14px;color:#0f172a;font-weight:700}
+.hp-checks{display:flex;flex-direction:column;gap:7px;margin-top:8px}
+.hp-status{font-family:var(--sans);font-size:12px;color:#0f172a;font-weight:800;margin-bottom:2px}
+.hp-check{display:flex;align-items:flex-start;gap:8px;font-family:var(--sans);font-size:11.5px;color:#475569;line-height:1.4;font-weight:600}
+.hp-tick{width:13px;height:13px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:800;flex-shrink:0;margin-top:1px}
+.hp-pending{width:13px;height:13px;border-radius:50%;background:transparent;border:1.3px solid #cbd5e1;flex-shrink:0;margin-top:1px}
 
 /* Ensure the next section after the hero has breathing room for the phone overflow */
-.market-section{background:#fff;padding-top:0;padding-bottom:60px}
+.market-section{background:#fff;padding-top:120px;padding-bottom:60px}
 .market-label{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8898aa;padding:5px 12px;border-radius:20px;border:1px solid #e5ebf7;background:#f8f9fe;margin-bottom:32px}
 .market-divider{height:1px;background:var(--border);margin-bottom:48px;width:90%}
 .market-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
@@ -145,16 +162,32 @@ a{color:var(--teal);text-decoration:none}
 
 /* === MOBILE HERO OVERRIDES (placed AFTER defaults so cascade wins without !important) === */
 @media(max-width:760px){
-  .hero-inner{grid-template-columns:1fr;gap:0;grid-template-areas:"copy" "phone"}
-  .hero-copy{padding:0 0 36px;text-align:left}
-  .hero h1{font-size:62px;line-height:1.02;text-align:left;letter-spacing:-0.035em}
-  .hero-sub{font-size:19px;text-align:left;margin:0 0 36px;line-height:1.5}
-  .hero-btns{justify-content:flex-start;margin-bottom:0}
-  .hero-phone-wrap{padding:0 0 50px;margin-bottom:0;align-items:center;z-index:1}
-  .hero-phone{width:min(340px,calc(100vw - 60px));height:auto;aspect-ratio:340/680;padding:8px}
-  .hero-phone::before{top:140px;height:50px}
-  .hero-phone::after{top:100px;height:30px;box-shadow:0 46px 0 #4a5160,0 90px 0 #4a5160}
-  .hero-phone-island{width:90px;height:24px;top:14px}
+  /* ─── Mobile responsive: NATURAL SCROLL ───
+     No scroll-snap, no forced viewport fit. Each section sizes to its
+     content with uniform 48px top + 48px bottom padding for consistent
+     vertical rhythm. */
+  section, .hero{
+    padding:48px 0 !important;
+    min-height:auto !important;
+    box-sizing:border-box;
+  }
+  .container{padding:0 20px !important;max-width:100% !important}
+  /* Hero: uniform 48px top + 48px bottom (matches all other sections) */
+  .hero{padding:48px 0 !important}
+  .hero-inner{grid-template-columns:1fr;gap:12px;grid-template-areas:"copy" "phone";align-items:start}
+  /* Flex-column gap = mathematically equal spacing between all 4 elements */
+  .hero-copy{padding:0;text-align:left;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+  .hero h1{font-size:clamp(34px,9.5vw,44px) !important;line-height:1.05;text-align:left;letter-spacing:-0.028em;margin:0 !important;white-space:nowrap;font-weight:800}
+  .hero-sub{font-size:15px;text-align:left;margin:0 !important;line-height:1.3}
+  .hero-flags{margin:0 !important;gap:8px}
+  .hero-flag{width:62px}
+  .hero-btns{justify-content:flex-start;margin:0 !important;gap:8px}
+  .btn{font-size:12px;padding:9px 16px;border-radius:8px;font-weight:600}
+  /* Phone — KEEP same as desktop (285×570) on mobile, same as Section 2 ERSTER phone */
+  .hero-phone-wrap{padding:0;margin:0 auto !important;align-items:center;z-index:1;display:flex;justify-content:center;width:100%}
+  .hero-phone{margin:0 auto}
+  /* hero-phone dimensions inherit from desktop (285×570) — no shrink */
+  /* hp-content/typography also inherit from desktop — no shrink */
 }
 
 /* 3 MODES — reference exact */
@@ -187,7 +220,7 @@ a{color:var(--teal);text-decoration:none}
 .section-h2 + .section-sub{margin-top:-32px}
 
 /* DEMO */
-.demo-section{background:var(--bg)}
+.demo-section{background:var(--bg2)}
 .demo-layout{display:grid;grid-template-columns:1fr;gap:24px;align-items:start;margin-top:40px;max-width:680px;margin-left:auto;margin-right:auto}
 
 /* MODE TABS */
@@ -370,18 +403,33 @@ a{color:var(--teal);text-decoration:none}
 .arch-node .arch-tag{font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:8px;background:var(--bg2);padding:2px 7px;border-radius:4px;border:1px solid var(--border)}
 .arch-arr{display:flex;align-items:center;padding:0 4px;color:var(--teal);font-size:16px;opacity:0.35;flex-shrink:0}
 
-/* FOOTER — reference exact: dark navy #0a1929 */
-footer{background:#0a1929;border-top:0;padding:48px 0;color:rgba(255,255,255,0.7);font-size:13px;line-height:1.55}
+/* FOOTER — green gradient matching ERSTER section */
+footer{background:linear-gradient(#22c55e 0%,#16a34a 100%);border-top:0;padding:48px 0;color:rgba(255,255,255,0.85);font-size:13px;line-height:1.55}
 .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .footer-brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:800;color:#fff}
-.footer-brand .tag{font-size:9px;font-weight:800;background:var(--teal);color:#fff;padding:2px 7px;border-radius:4px;letter-spacing:0.08em}
+.footer-brand .tag{font-size:9px;font-weight:800;background:rgba(255,255,255,0.2);color:#fff;padding:2px 7px;border-radius:4px;letter-spacing:0.08em}
 .footer-links{display:flex;gap:22px}
-.footer-links a{font-size:13px;color:#94a3b8;transition:color 0.2s}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.85);transition:color 0.2s}
 .footer-links a:hover{color:#fff}
-.footer-note{font-size:11px;color:#64748b;font-family:var(--mono)}
-footer .footer-inner > div:first-child > div:last-child{color:#64748b !important}
+.footer-note{font-size:11px;color:rgba(255,255,255,0.7);font-family:var(--mono)}
+footer .footer-inner > div:first-child > div:last-child{color:rgba(255,255,255,0.7) !important}
 
-@media(max-width:900px){
+/* Tablet (760-1024px): 2-column grids for better space usage */
+@media(min-width:761px) and (max-width:1024px){
+  .modes-grid,.platform-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .demo-layout{grid-template-columns:1fr}
+  .terminal-panel{position:static}
+  .arch-flow{flex-wrap:wrap}
+  .arch-node{min-width:120px}
+  .section{padding:70px 0}
+  .market-section{padding:80px 0 40px !important}
+  .market-grid{grid-template-columns:repeat(2,1fr);gap:24px}
+  .ms-num{font-size:42px;margin-bottom:12px}
+  .ms-desc{font-size:15px}
+  .mode-card{padding:26px 22px}
+}
+/* Mobile (≤760px): single-column collapse */
+@media(max-width:760px){
   .demo-layout,.modes-grid,.platform-grid{grid-template-columns:1fr}
   .terminal-panel{position:static}
   .arch-flow{flex-wrap:wrap}
@@ -408,7 +456,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .demo-head{text-align:left !important}
   .nav-logo{font-size:15px}
   .nav-logo .tag{font-size:8px;padding:2px 6px}
-  .stellar-badge{font-size:10px;padding:3px 9px}
+  .algo-badge{font-size:10px;padding:3px 9px}
   .hero{padding:48px 0 0}
   .hero-inner{padding-bottom:0}
   .hero-copy{padding-bottom:36px}
@@ -447,8 +495,76 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 @media(max-width:640px){
   .nav-links{display:none}
   .hero h1{font-size:54px}
-  .mode-tabs{flex-direction:column;width:100%}
-  .mode-tabs button{width:100%}
+  /* Mobile tabs: HORIZONTAL (was vertical) — compact pill style */
+  .mode-tabs{flex-direction:row;width:100%;padding:3px}
+  .mode-tabs button{flex:1;min-width:0;width:auto;font-size:11px;padding:8px 6px;letter-spacing:-0.01em}
+  /* Smaller section headings on mobile — proportional to hero */
+  .section-h2{font-size:clamp(26px,7vw,34px) !important;margin-bottom:20px !important;line-height:1.08}
+  /* === DEMO WINDOW: compress all 9 windows to fit one viewport === */
+  /* Headers + step indicator */
+  .step-header{margin-bottom:8px}
+  .step-num{font-size:9px;letter-spacing:0.06em;margin-bottom:2px}
+  .step-title{font-size:14px;line-height:1.25}
+  /* Info cards (key/value data) */
+  .info-card{padding:9px 11px;margin-bottom:7px;border-radius:8px}
+  .ic-row{flex-direction:row !important;justify-content:space-between !important;align-items:center !important;gap:6px;margin-bottom:4px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+  .ic-row:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+  .ic-label{font-size:9px;letter-spacing:0.06em}
+  .ic-val{font-size:10.5px !important;text-align:right !important;word-break:break-word}
+  /* Check lists (animated ticks) */
+  .check-list{gap:5px}
+  .check-list li{font-size:10.5px;line-height:1.3;gap:7px}
+  .check-list li::before, .check-list li.ok::before, .check-list li.ok-purple::before{width:14px;height:14px;font-size:8px}
+  /* Verdict boxes (approved / executed / etc) */
+  .verdict-box{padding:9px 11px;margin-bottom:7px}
+  .verdict-icon{font-size:22px !important;margin-bottom:2px !important}
+  .verdict-title{font-size:13px !important;margin-bottom:2px !important}
+  .verdict-sub{font-size:10px !important;line-height:1.3 !important}
+  /* Human action card (Supervised mode) */
+  .human-action{padding:10px 11px;margin-bottom:7px}
+  .ha-label{font-size:9px;margin-bottom:5px}
+  .ha-msg{font-size:11px;line-height:1.35;margin-bottom:7px}
+  .ha-btns{flex-direction:column;gap:5px}
+  .ha-btn{font-size:11px;padding:7px 10px;width:100%}
+  /* Code blocks stay visible on mobile but scrollable + smaller */
+  .code-block{font-size:9px !important;padding:8px 10px !important;line-height:1.45 !important;overflow-x:auto;margin-bottom:8px}
+  .score-bar-wrap{margin:6px 0}
+  .progress-wrap{height:3px;margin:6px 0}
+  /* Anchor box (Stellar txid display) */
+  .anchor-box{padding:8px 10px !important;margin:6px 0 !important}
+  .anchor-box .lbl, .anchor-box .tx{font-size:10px !important}
+  /* Step controls (Back / Next buttons) */
+  .step-controls{padding:8px 10px !important;gap:6px !important;flex-wrap:wrap}
+  .step-controls button{font-size:11px !important;padding:7px 10px !important}
+  /* Terminal/logs panel — kept hidden on mobile (sticky desktop sidebar) */
+  .terminal-panel{display:none !important}
+
+  /* === ARCHITECTURE (One request. Full settlement.) === */
+  .flow-box{padding:0;border-radius:10px}
+  .flow-row{flex-direction:column !important;padding:14px 12px !important;gap:6px;min-height:0 !important;overflow-x:visible !important}
+  .flow-step{flex:0 0 auto;min-width:0 !important;width:100%}
+  .flow-tag{padding:8px 10px !important;font-size:11px !important}
+  .flow-tag .sub{font-size:9px !important;margin-top:1px !important}
+  .flow-label{font-size:8px !important;margin-top:3px !important}
+  .flow-arrow{transform:rotate(90deg);font-size:14px !important;padding:0 !important;height:14px}
+
+  /* Architecture 3 fact cards (Validators / Settlement / Verification) — stack as 1 column on mobile */
+  #architecture .x402-grid{grid-template-columns:1fr !important;gap:10px !important;margin-top:14px !important}
+
+  /* === x402 (Pay-per-evaluation. Agent-native commerce.) === */
+  .x402-grid{gap:10px !important}
+  /* Terminal block on mobile — smaller */
+  pre#x402-terminal{font-size:10px !important;min-height:130px !important;max-height:160px !important;padding:10px 12px !important}
+  /* Payment schemes block — tighter */
+
+  /* === ERSTER OPENER (Assets. Agentic Investors.) === */
+  /* ERSTER opener: symmetric top + bottom */
+  .erster-section{padding:32px 0 !important}
+  .erster-section .section-h2{font-size:clamp(32px,8.5vw,42px) !important;margin-bottom:18px !important}
+  .erster-inner{gap:24px !important}
+  .erster-browser{margin:0 auto !important;transform:none !important;width:228px;height:456px}
+  .er-dash{min-height:auto !important}
+  .er-dash{min-height:280px !important}
   .arch-node{flex:1 1 50%;min-width:0}
   .terminal-panel{font-size:11px}
   .footer{font-size:12px}
@@ -456,6 +572,13 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .footer-links{flex-wrap:wrap;gap:14px 18px}
   .reg-anchor-grid{grid-template-columns:1fr !important}
   .platform-grid{grid-template-columns:1fr}
+  .x402-grid{grid-template-columns:1fr !important;gap:20px !important}
+  .hero-phone-wrap{margin:0 !important}
+}
+/* Tablet — 2-column x402 grid + fact cards stack */
+@media(min-width:641px) and (max-width:1024px){
+  .x402-grid{grid-template-columns:1fr !important;gap:24px !important}
+  .hero-phone-wrap{margin-bottom:0 !important}
 }
 /* Tablet 2-col grid for validator + regulatory cards */
 @media(min-width:601px) and (max-width:900px){
@@ -463,25 +586,84 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 }
 
 /* ============== ERSTER OPENER SECTION (above hero) ============== */
-.erster-section{background:linear-gradient(#22c55e 0%,#16a34a 100%);padding:100px 0;overflow:hidden}
+.erster-section{background:linear-gradient(#22c55e 0%,#16a34a 100%);padding:80px 0 60px;overflow:hidden}
 .erster-section .section-h2{color:#fff}
 .erster-section .section-h2 .muted{color:rgba(255,255,255,0.55);font-weight:600}
-.erster-inner{display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center}
-.erster-copy{padding-right:8px}
+/* Mirror Hero's grid: same ratios, same gap=0 — unified feel */
+.erster-inner{display:grid;grid-template-columns:1.05fr 0.95fr;grid-template-areas:"copy phone";gap:0;align-items:center}
+.erster-copy{grid-area:copy;padding-right:0}
 .erster-section .section-label{margin-bottom:18px}
 .erster-section .section-h2{margin-bottom:24px;font-size:clamp(40px,4.5vw,60px);line-height:1.04;letter-spacing:-0.03em}
 .erster-section .section-h2 .ln{display:block;white-space:nowrap}
 .erster-sub{font-size:17px;color:var(--text2);line-height:1.55;max-width:520px}
 
-/* Browser-framed dashboard mockup */
-.erster-browser{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg)}
-.erster-bar{background:#f1f5f9;border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:14px}
-.erster-dots{display:flex;gap:6px}
-.erster-dots span{width:10px;height:10px;border-radius:50%}
-.erster-dots span:nth-child(1){background:#ff5f57}
-.erster-dots span:nth-child(2){background:#febc2e}
-.erster-dots span:nth-child(3){background:#28c840}
-.erster-url{flex:1;background:#fff;border:1px solid var(--border);border-radius:8px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--text3);max-width:260px;margin:0 auto;text-align:center}
+/* iPhone portrait phone frame — 228×456 (20% smaller than 285×570) */
+.erster-browser{
+  grid-area:phone;
+  justify-self:end;
+  background:#0a2540;
+  border-radius:43px;
+  padding:6px;
+  width:228px;
+  height:456px;
+  margin:0 auto;
+  position:relative;
+  box-shadow:
+    0 0 0 1.2px rgba(74,81,96,0.35),
+    0 2px 5px rgba(15,23,42,0.05),
+    0 10px 19px rgba(15,23,42,0.07),
+    0 22px 45px rgba(15,23,42,0.10),
+    0 45px 80px rgba(15,23,42,0.10);
+}
+/* Side buttons — scaled 0.8× from hero positions */
+.erster-browser::before{content:'';position:absolute;right:-2px;top:128px;width:4px;height:48px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
+.erster-browser::after{content:'';position:absolute;left:-2px;top:94px;width:4px;height:27px;background:linear-gradient(270deg,#1a1f2a,#4a5160);border-radius:3px 0 0 3px;box-shadow:0 42px 0 #4a5160,0 80px 0 #4a5160}
+.erster-browser-inner{background:#f8f9fe;border-radius:37px;overflow:hidden;position:relative;height:100%;display:flex;flex-direction:column}
+/* Dashboard fills available space */
+.erster-browser .er-dash{flex:1;overflow:hidden}
+.erster-bar{background:#fff;padding:11px 19px 6px;display:flex;align-items:center;justify-content:space-between;gap:11px;position:relative;min-height:28px}
+.erster-time{font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:12px;font-weight:600;color:#000;letter-spacing:-0.01em}
+.erster-island{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:62px;height:18px;background:#000;border-radius:12px}
+.erster-status{display:flex;align-items:center;gap:4px;color:#000}
+.erster-status svg{display:block}
+.erster-home-indicator{display:flex;justify-content:center;padding:6px 0 11px;background:#f8f9fe}
+.erster-home-indicator span{display:block;width:102px;height:4px;background:#000;border-radius:3px}
+/* Safari-style browser bar inside phone (below status bar) */
+.erster-safari-bar{background:#fff;padding:5px 10px 8px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(0,0,0,0.06)}
+.erster-safari-url{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:#f1f3f6;border-radius:8px;padding:5px 10px;font-size:10.5px;color:#1c1c1e;font-weight:500;font-family:-apple-system,'SF Pro Text',Inter,sans-serif}
+.erster-safari-url svg{width:9px;height:9px;color:#6b6b70;flex-shrink:0}
+/* legacy dots/url no longer used */
+.erster-dots,.erster-url{display:none}
+
+/* Mobile-fit polished overrides — 20% smaller (compact for 228×456 phone) */
+.erster-browser .er-dash{grid-template-columns:1fr !important;min-height:auto !important;background:#f8f9fe}
+.erster-browser .er-sidebar{display:none !important}
+.erster-browser .er-main{padding:11px 11px 6px !important;display:flex;flex-direction:column;gap:8px}
+.erster-browser .er-grid{margin-bottom:0 !important;gap:8px !important}
+/* Title */
+.erster-browser .er-title{font-size:16px !important;font-weight:800 !important;margin-bottom:0 !important;letter-spacing:-0.02em}
+/* Asset card */
+.erster-browser .er-card{padding:11px !important;border-radius:10px !important}
+.erster-browser .er-card-h{font-size:10.5px !important;font-weight:800 !important;margin-bottom:8px !important;color:var(--text)}
+.erster-browser .er-asset{background:transparent !important;padding:0 !important}
+.erster-browser .er-tag-mini{font-size:7.5px !important;padding:2px 6px !important;font-weight:800 !important;margin-bottom:6px !important}
+.erster-browser .er-asset-name{font-size:13px !important;font-weight:500 !important;margin-bottom:7px !important;color:var(--text2) !important}
+.erster-browser .er-asset-amount{font-size:18px !important;font-weight:800 !important;margin-bottom:8px !important;letter-spacing:-0.025em !important}
+.erster-browser .er-bar{height:3px !important;border-radius:2px !important}
+/* Investors table card */
+.erster-browser .er-table-card{padding:11px !important;border-radius:10px !important}
+.erster-browser .er-table-card h3{font-size:11px !important;font-weight:800 !important;margin-bottom:2px !important;color:var(--text)}
+.erster-browser .er-table-card p{font-size:8.5px !important;margin-bottom:8px !important;color:var(--text3)}
+.erster-browser .er-table{font-size:10px !important}
+.erster-browser .er-table th{font-size:7px !important;padding:5px 0 !important;font-weight:700 !important;letter-spacing:0.12em !important;color:var(--text3)}
+.erster-browser .er-table td{padding:6px 0 !important;font-weight:600 !important}
+.erster-browser .er-table td:first-child{font-weight:700 !important;color:var(--text) !important}
+/* Agent column → mono font */
+.erster-browser .er-table td:nth-child(2){font-family:var(--mono) !important;color:var(--text2) !important;font-size:9.5px !important;font-weight:500 !important}
+/* Status pills */
+.erster-browser .er-pill-status{font-size:8.5px !important;padding:2px 7px !important;font-weight:800 !important;border-radius:7px !important}
+/* USER WISH: Approved pill purple (like AI referred) instead of green */
+.erster-browser .er-pill-status.approved{background:#efe9ff !important;color:#7B61FF !important}
 
 /* Dashboard layout — compact for laptop viewport */
 .er-dash{display:grid;grid-template-columns:160px 1fr;background:#f8f9fe;min-height:400px}
@@ -546,41 +728,40 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 .er-pill-status.waiting{background:#f1f5f9;color:var(--text3)}
 .er-pill-status.rejected{background:#fee2e2;color:#dc2626}
 
-/* TABLET — stack copy + browser, dashboard fills container width (same edges as rest of website) */
+/* TEAM SECTION */
+.team-section .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto}
+.team-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,23,42,0.06)}
 @media(max-width:1024px){
+  .team-section{padding:70px 0 !important}
+  .team-section .team-grid{grid-template-columns:repeat(2,1fr) !important;max-width:680px;gap:16px}
+}
+@media(max-width:560px){
+  .team-section{padding:56px 0 !important}
+  .team-section .team-grid{grid-template-columns:1fr !important;max-width:420px;gap:14px}
+  .team-card{padding:22px 20px !important}
+}
+
+/* TABLET — stack copy + browser, dashboard fills container width (same edges as rest of website) */
+/* Tablet (761-1024px): keep ERSTER side-by-side (text | phone) like hero */
+@media(min-width:761px) and (max-width:1024px){
   .erster-section{padding:80px 0 60px}
-  .erster-inner{grid-template-columns:1fr;gap:36px}
-  .erster-copy{padding-right:0;max-width:680px}
-  .erster-browser{max-width:none;margin:0 auto;width:100%}
-  /* slight internal tighten */
-  .er-dash{grid-template-columns:160px 1fr;min-height:400px}
-  .er-main{padding:14px 16px}
+  .erster-inner{grid-template-columns:1.05fr 0.95fr;gap:32px;align-items:center;justify-items:stretch}
+  .erster-copy{padding-right:0;max-width:none;text-align:left;width:auto}
+  .erster-browser{width:228px;height:456px;margin:0 auto}
+}
+/* Mobile (≤760px): stack ERSTER vertically (text on top, phone below centered) */
+@media(max-width:760px){
+  .erster-section{padding:60px 0 40px}
+  .erster-inner{grid-template-columns:1fr !important;grid-template-areas:"copy" "phone" !important;gap:36px !important;justify-items:center}
+  .erster-copy{padding-right:0;max-width:680px;text-align:left;width:100%}
+  .erster-browser{width:228px;height:456px;margin:0 auto;justify-self:center !important}
 }
 
 @media(max-width:780px){
   .erster-section{padding:60px 0 40px}
   .erster-section .section-h2{font-size:62px;line-height:1.02;letter-spacing:-0.035em}
   .erster-section .section-h2 .ln{white-space:normal}
-  .er-dash{grid-template-columns:140px 1fr;min-height:360px}
-  .er-sidebar{padding:13px 9px}
-  .er-logo{font-size:11px;margin-bottom:11px;padding:0 6px}
-  .er-nav-item{font-size:9.5px;padding:4px 6px;gap:5px}
-  .er-nav-item .er-bullet{width:5px;height:5px}
-  .er-nav-label{font-size:7px;margin:11px 6px 3px}
-  .er-main{padding:13px 15px}
-  .er-search{font-size:9px;padding:5px 8px 5px 22px;margin-bottom:11px}
-  .er-title{font-size:14px;margin-bottom:11px}
-  .er-card{padding:11px}
-  .er-asset-amount{font-size:11px}
-  .er-asset-name{font-size:8.5px}
-  .er-chart{height:60px}
-  .er-table-card{padding:9px}
-  .er-table th{font-size:7px}
-  .er-table td{font-size:8px}
-  .er-pill-status{font-size:7.5px;padding:2px 7px}
-  .er-table th:nth-child(3),.er-table td:nth-child(3),
-  .er-table th:nth-child(4),.er-table td:nth-child(4),
-  .er-table th:nth-child(6),.er-table td:nth-child(6){display:none}
+  /* phone frame stays portrait — all 4 columns (Name/Agent/Wallet/KYC) stay visible */
 }
 
 @media(max-width:640px){
@@ -630,24 +811,50 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 <body>
 
 <!-- NAV -->
+<style>
+  .nav-brand-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+  .nav-brand-mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#22c55e,#16a34a);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;letter-spacing:0;line-height:1;box-shadow:0 4px 10px rgba(22,163,74,0.25), inset 0 1px 0 rgba(255,255,255,0.25)}
+  .nav-brand-text{font-weight:800;font-size:17px;letter-spacing:0.18em;color:var(--text)}
+  .nav-link{position:relative;font-size:14px;font-weight:600;color:var(--text2);text-decoration:none;padding:6px 0;transition:color .15s}
+  .nav-link:hover{color:var(--text)}
+  .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;background:var(--teal);border-radius:2px;transform:scaleX(0);transform-origin:center;transition:transform .2s ease}
+  .nav-link:hover::after{transform:scaleX(0.6)}
+  .nav-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:5px 11px;border-radius:999px;font-family:var(--mono);letter-spacing:0.04em}
+  .nav-pill.purple{background:#f5f3ff;color:#6d28d9;border:1px solid #ddd6fe}
+  .nav-pill.teal{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}
+  .nav-pill .dot{width:6px;height:6px;border-radius:50%}
+  .nav-pill.purple .dot{background:#7c3aed;box-shadow:0 0 0 2px rgba(124,58,237,0.18)}
+  .nav-pill.teal .dot{background:#10b981;box-shadow:0 0 0 2px rgba(16,185,129,0.18)}
+  .nav-cta{display:inline-flex;align-items:center;gap:6px;background:#16a34a;color:#fff;font-size:13px;font-weight:700;padding:9px 18px;border-radius:999px;text-decoration:none;letter-spacing:0;line-height:1;white-space:nowrap;box-shadow:0 6px 14px rgba(22,163,74,0.22);transition:transform .15s ease, box-shadow .2s ease, background .15s}
+  .nav-cta:hover{background:#15803d;transform:translateY(-1px);box-shadow:0 8px 20px rgba(22,163,74,0.32)}
+  .nav-cta .arrow{transition:transform .2s ease}
+  .nav-cta:hover .arrow{transform:translateX(2px)}
+  /* Centered nav menu on desktop, full nav hidden on mobile */
+  .nav-links-center{display:flex;gap:36px;justify-self:center}
+  @media(max-width:760px){
+    .nav{display:none !important}
+  }
+  @media(max-width:560px){
+    .nav-cta{padding:8px 14px;font-size:12px}
+  }
+</style>
 <nav class="nav">
-  <div class="container nav-inner">
-    <div class="nav-logo" style="letter-spacing:0.12em">ERSTER</div>
-    <div class="nav-links">
-      <a href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
-      <a href="#platforms">Platforms</a>
-      <a href="/docs.html" target="_blank">Tech Docs</a>
+  <div class="container nav-inner" style="position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px">
+    <a href="/" class="nav-brand-wrap" style="justify-self:start">
+      <span class="nav-brand-text">VERUN</span>
+    </a>
+    <div class="nav-links nav-links-center">
+      <a class="nav-link" href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
+      <a class="nav-link" href="#x402">x402</a>
+      <a class="nav-link" href="/docs.html" target="_blank">Tech Docs</a>
     </div>
-    <div class="nav-right">
-      <div class="stellar-badge">
-        <span class="stellar-dot"></span>
-        Stellar Testnet
-      </div>
+    <div class="nav-right" style="display:flex;align-items:center;gap:8px;justify-self:end">
+      <a href="/waitlist.html" class="nav-cta">Join waitlist <span class="arrow">→</span></a>
     </div>
   </div>
 </nav>
 
-<!-- ERSTER OPENER (above hero) -->
+<!-- ERSTER PLATFORM CONTEXT (now Section 1) -->
 <section class="erster-section" id="erster">
   <div class="container">
     <div class="erster-inner">
@@ -655,9 +862,24 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
         <h2 class="section-h2"><span class="ln">Assets.</span><span class="ln">Agentic Investors.</span><span class="ln muted">One Workflow.</span></h2>
       </div>
       <div class="erster-browser">
+        <div class="erster-browser-inner">
         <div class="erster-bar">
-          <div class="erster-dots"><span></span><span></span><span></span></div>
-          <div class="erster-url">erster.fund</div>
+          <div class="erster-time">9:41</div>
+          <div class="erster-island"></div>
+          <div class="erster-status">
+            <!-- signal bars removed -->
+            <!-- wifi -->
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1 4.2 C4.5 1.2 11.5 1.2 15 4.2"/><path d="M3.4 6.4 C5.9 4.4 10.1 4.4 12.6 6.4"/><path d="M5.8 8.6 C6.9 7.7 9.1 7.7 10.2 8.6"/><circle cx="8" cy="10" r="0.9" fill="currentColor"/></svg>
+            <!-- battery -->
+            <svg width="26" height="12" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5" stroke="currentColor" stroke-width="0.8" opacity="0.55"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="currentColor"/><rect x="23.5" y="3.5" width="1.5" height="5" rx="0.7" fill="currentColor" opacity="0.55"/></svg>
+          </div>
+        </div>
+        <!-- Safari browser URL bar -->
+        <div class="erster-safari-bar">
+          <div class="erster-safari-url">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0a14 14 0 010 20m0-20a14 14 0 000 20M2 12h20"/></svg>
+            erster.fund
+          </div>
         </div>
         <div class="er-dash">
           <div class="er-sidebar">
@@ -675,54 +897,14 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
             <div class="er-nav-item amber"><span class="er-bullet"></span>VERUN Validator</div>
           </div>
           <div class="er-main">
-            <input class="er-search" placeholder="Search">
             <div class="er-title">Platform overview</div>
             <div class="er-grid">
               <div class="er-card">
-                <div class="er-card-h">Current Sales Status of Assets</div>
-                <div class="er-asset-row">
-                  <div class="er-asset">
-                    <div class="er-asset-icon"></div>
-                    <div class="er-asset-name">TKFG Bond FLEX</div>
-                    <div class="er-asset-amount">€2M of €8M raised</div>
-                    <div class="er-bar"><div class="er-bar-fill green"></div></div>
-                  </div>
-                  <div class="er-asset">
-                    <div class="er-asset-icon purple"></div>
-                    <span class="er-tag-mini purple">VERUN AI REFERRALS</span>
-                    <div class="er-asset-name">TKFG Bond CLASSIC</div>
-                    <div class="er-asset-amount">€4M of €10M <span class="ai">AI referred</span></div>
-                    <div class="er-bar"><div class="er-bar-fill purple"></div></div>
-                  </div>
+                <div class="er-asset" style="margin-bottom:0">
+                  <div class="er-asset-name">SpaceX Pre-IPO</div>
+                  <div class="er-asset-amount"><span class="ai">€1.8M</span> of €4M <span class="ai">AI referred</span></div>
+                  <div class="er-bar"><div class="er-bar-fill purple"></div></div>
                 </div>
-              </div>
-              <div class="er-card er-chart-card">
-                <span class="er-tag-mini verun">VERUN AI</span>
-                <div class="er-chart-title">Weekly Agentic Referrals <span class="er-chart-pct">+15.2%</span></div>
-                <div class="er-chart">
-                  <svg viewBox="0 0 200 80" preserveAspectRatio="none">
-                    <rect x="5" y="30" width="14" height="50" rx="2" fill="#e2e8f0"/>
-                    <rect x="25" y="14" width="14" height="66" rx="2" fill="#e2e8f0"/>
-                    <rect x="45" y="38" width="14" height="42" rx="2" fill="#e2e8f0"/>
-                    <rect x="65" y="32" width="14" height="48" rx="2" fill="#e2e8f0"/>
-                    <rect x="85" y="42" width="14" height="38" rx="2" fill="#e2e8f0"/>
-                    <rect x="105" y="6" width="14" height="74" rx="2" fill="#e2e8f0"/>
-                    <rect x="125" y="22" width="14" height="58" rx="2" fill="#e2e8f0"/>
-                    <rect x="145" y="18" width="14" height="62" rx="2" fill="#e2e8f0"/>
-                    <rect x="165" y="26" width="14" height="54" rx="2" fill="#e2e8f0"/>
-                    <polyline points="12,42 32,38 52,46 72,40 92,44 112,28 132,34 152,22 172,30" fill="none" stroke="#7B61FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="12" cy="42" r="2" fill="#7B61FF"/>
-                    <circle cx="32" cy="38" r="2" fill="#7B61FF"/>
-                    <circle cx="52" cy="46" r="2" fill="#7B61FF"/>
-                    <circle cx="72" cy="40" r="2" fill="#7B61FF"/>
-                    <circle cx="92" cy="44" r="2" fill="#7B61FF"/>
-                    <circle cx="112" cy="28" r="2" fill="#7B61FF"/>
-                    <circle cx="132" cy="34" r="2" fill="#7B61FF"/>
-                    <circle cx="152" cy="22" r="2" fill="#7B61FF"/>
-                    <circle cx="172" cy="30" r="2" fill="#7B61FF"/>
-                  </svg>
-                </div>
-                <div class="er-legend"><span>Referrals per Day</span><span class="line">Avg · AI-driven</span></div>
               </div>
             </div>
             <div class="er-table-card">
@@ -730,18 +912,19 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
               <p>Your detailed overview about your investors.</p>
               <table class="er-table">
                 <thead>
-                  <tr><th>Name</th><th>Email</th><th>Wallet</th><th>Reg.</th><th>KYC</th></tr>
+                  <tr><th>Name</th><th>Agent</th><th>KYC</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>Tommy Sicilia</td><td>tommy@gmail.com</td><td>0X3FC…478</td><td>02/04/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
-                  <tr><td>Waldemar Mannering</td><td>mann@stack3.io</td><td>0XVDD…Z46</td><td>10/05/26</td><td><span class="er-pill-status waiting">Waiting</span></td></tr>
-                  <tr><td>Louetta Esses</td><td>admin@sisyphus.com</td><td>7XJFQ…V12</td><td>22/06/26</td><td><span class="er-pill-status rejected">Rejected</span></td></tr>
-                  <tr><td>Tessa Meyer</td><td>tessmeyer@gmail.com</td><td>0X1FC…532</td><td>04/08/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
+                  <tr><td>Tom Lee</td><td>openai</td><td><span class="er-pill-status approved">Approved</span></td></tr>
+                  <tr><td>Maya Chen</td><td>claude</td><td><span class="er-pill-status waiting">Waiting</span></td></tr>
+                  <tr><td>Lou Esses</td><td>hermes</td><td><span class="er-pill-status rejected">Rejected</span></td></tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+        <div class="erster-home-indicator"><span></span></div>
+        </div><!-- /.erster-browser-inner -->
       </div>
     </div>
   </div>
@@ -752,15 +935,14 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   <div class="container">
     <div class="hero-inner">
       <div class="hero-copy">
-        <h1>Trusted agents.<br><span class="muted">Scored referrals.</span></h1>
-        <p class="hero-sub">Make your AI agent <strong>regulatory-ready</strong>.<br>MiFID II + EU AI Act compliant.<br>Verun is the agentic trust layer by Erster.</p>
+        <h1>Trusted agents.</h1>
+        <p class="hero-sub">Make your AI agent <strong>regulatory ready</strong>.</p>
         <div class="hero-flags">
           <svg class="hero-flag" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg" aria-label="MiFID II compliant"><rect width="100" height="70" rx="3" fill="#003399"/><g fill="#FFCC00"><path d="M50,5.2 L50.629,7.135 L52.663,7.135 L51.018,8.331 L51.647,10.265 L50,9.07 L48.353,10.265 L48.982,8.331 L47.337,7.135 L49.371,7.135 Z"/><path d="M63.5,8.82 L64.129,10.755 L66.163,10.755 L64.518,11.951 L65.147,13.885 L63.5,12.69 L61.853,13.885 L62.482,11.951 L60.837,10.755 L62.871,10.755 Z"/><path d="M73.38,18.7 L74.009,20.635 L76.043,20.635 L74.398,21.831 L75.027,23.765 L73.38,22.57 L71.733,23.765 L72.362,21.831 L70.717,20.635 L72.751,20.635 Z"/><path d="M77,32.2 L77.629,34.135 L79.663,34.135 L78.018,35.331 L78.647,37.265 L77,36.07 L75.353,37.265 L75.982,35.331 L74.337,34.135 L76.371,34.135 Z"/><path d="M73.38,45.7 L74.009,47.635 L76.043,47.635 L74.398,48.831 L75.027,50.765 L73.38,49.57 L71.733,50.765 L72.362,48.831 L70.717,47.635 L72.751,47.635 Z"/><path d="M63.5,55.58 L64.129,57.515 L66.163,57.515 L64.518,58.711 L65.147,60.645 L63.5,59.45 L61.853,60.645 L62.482,58.711 L60.837,57.515 L62.871,57.515 Z"/><path d="M50,59.2 L50.629,61.135 L52.663,61.135 L51.018,62.331 L51.647,64.265 L50,63.07 L48.353,64.265 L48.982,62.331 L47.337,61.135 L49.371,61.135 Z"/><path d="M36.5,55.58 L37.129,57.515 L39.163,57.515 L37.518,58.711 L38.147,60.645 L36.5,59.45 L34.853,60.645 L35.482,58.711 L33.837,57.515 L35.871,57.515 Z"/><path d="M26.62,45.7 L27.249,47.635 L29.283,47.635 L27.638,48.831 L28.267,50.765 L26.62,49.57 L24.973,50.765 L25.602,48.831 L23.957,47.635 L25.991,47.635 Z"/><path d="M23,32.2 L23.629,34.135 L25.663,34.135 L24.018,35.331 L24.647,37.265 L23,36.07 L21.353,37.265 L21.982,35.331 L20.337,34.135 L22.371,34.135 Z"/><path d="M26.62,18.7 L27.249,20.635 L29.283,20.635 L27.638,21.831 L28.267,23.765 L26.62,22.57 L24.973,23.765 L25.602,21.831 L23.957,20.635 L25.991,20.635 Z"/><path d="M36.5,8.82 L37.129,10.755 L39.163,10.755 L37.518,11.951 L38.147,13.885 L36.5,12.69 L34.853,13.885 L35.482,11.951 L33.837,10.755 L35.871,10.755 Z"/></g><text x="50" y="40" text-anchor="middle" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="800" letter-spacing="-0.02em">MiFID II</text></svg>
           <svg class="hero-flag" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg" aria-label="EU AI Act compliant"><rect width="100" height="70" rx="3" fill="#003399"/><g fill="#FFCC00"><path d="M50,5.2 L50.629,7.135 L52.663,7.135 L51.018,8.331 L51.647,10.265 L50,9.07 L48.353,10.265 L48.982,8.331 L47.337,7.135 L49.371,7.135 Z"/><path d="M63.5,8.82 L64.129,10.755 L66.163,10.755 L64.518,11.951 L65.147,13.885 L63.5,12.69 L61.853,13.885 L62.482,11.951 L60.837,10.755 L62.871,10.755 Z"/><path d="M73.38,18.7 L74.009,20.635 L76.043,20.635 L74.398,21.831 L75.027,23.765 L73.38,22.57 L71.733,23.765 L72.362,21.831 L70.717,20.635 L72.751,20.635 Z"/><path d="M77,32.2 L77.629,34.135 L79.663,34.135 L78.018,35.331 L78.647,37.265 L77,36.07 L75.353,37.265 L75.982,35.331 L74.337,34.135 L76.371,34.135 Z"/><path d="M73.38,45.7 L74.009,47.635 L76.043,47.635 L74.398,48.831 L75.027,50.765 L73.38,49.57 L71.733,50.765 L72.362,48.831 L70.717,47.635 L72.751,47.635 Z"/><path d="M63.5,55.58 L64.129,57.515 L66.163,57.515 L64.518,58.711 L65.147,60.645 L63.5,59.45 L61.853,60.645 L62.482,58.711 L60.837,57.515 L62.871,57.515 Z"/><path d="M50,59.2 L50.629,61.135 L52.663,61.135 L51.018,62.331 L51.647,64.265 L50,63.07 L48.353,64.265 L48.982,62.331 L47.337,61.135 L49.371,61.135 Z"/><path d="M36.5,55.58 L37.129,57.515 L39.163,57.515 L37.518,58.711 L38.147,60.645 L36.5,59.45 L34.853,60.645 L35.482,58.711 L33.837,57.515 L35.871,57.515 Z"/><path d="M26.62,45.7 L27.249,47.635 L29.283,47.635 L27.638,48.831 L28.267,50.765 L26.62,49.57 L24.973,50.765 L25.602,48.831 L23.957,47.635 L25.991,47.635 Z"/><path d="M23,32.2 L23.629,34.135 L25.663,34.135 L24.018,35.331 L24.647,37.265 L23,36.07 L21.353,37.265 L21.982,35.331 L20.337,34.135 L22.371,34.135 Z"/><path d="M26.62,18.7 L27.249,20.635 L29.283,20.635 L27.638,21.831 L28.267,23.765 L26.62,22.57 L24.973,23.765 L25.602,21.831 L23.957,20.635 L25.991,20.635 Z"/><path d="M36.5,8.82 L37.129,10.755 L39.163,10.755 L37.518,11.951 L38.147,13.885 L36.5,12.69 L34.853,13.885 L35.482,11.951 L33.837,10.755 L35.871,10.755 Z"/></g><text x="50" y="40" text-anchor="middle" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="800" letter-spacing="-0.02em">AI Act</text></svg>
         </div>
         <div class="hero-btns">
-          <button class="btn btn-teal" onclick="scrollToDemo()">Run Demo →</button>
-          <a href="/docs.html" target="_blank" class="btn btn-outline">View Docs</a>
+          <a href="/waitlist.html" class="btn btn-teal" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">Join waitlist →</a>
         </div>
       </div>
       <!-- Phone mockup (iPhone 15 Pro style, shows live demo content) -->
@@ -768,41 +950,43 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
         <div class="hero-phone">
           <div class="hero-phone-island"></div>
           <div class="hero-phone-screen">
+            <!-- iPhone status bar -->
+            <div class="hp-status-bar">
+              <div class="hp-time">9:41</div>
+              <div class="hp-status-icons">
+                <!-- wifi -->
+                <svg width="14" height="10" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1 4.2 C4.5 1.2 11.5 1.2 15 4.2"/><path d="M3.4 6.4 C5.9 4.4 10.1 4.4 12.6 6.4"/><path d="M5.8 8.6 C6.9 7.7 9.1 7.7 10.2 8.6"/><circle cx="8" cy="10" r="0.9" fill="currentColor"/></svg>
+                <!-- battery -->
+                <svg width="22" height="10" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5" stroke="currentColor" stroke-width="0.8" opacity="0.55"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="currentColor"/><rect x="23.5" y="3.5" width="1.5" height="5" rx="0.7" fill="currentColor" opacity="0.55"/></svg>
+              </div>
+            </div>
+            <!-- Safari URL bar -->
+            <div class="hp-safari-bar">
+              <div class="hp-safari-url">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0a14 14 0 010 20m0-20a14 14 0 000 20M2 12h20"/></svg>
+                verun.network
+              </div>
+            </div>
             <div class="hp-content">
               <div class="hp-nav">
                 <span class="hp-back">← Back</span>
                 <span class="hp-counter">Step 1 of 3</span>
                 <span class="hp-next">Next →</span>
               </div>
-              <div class="hp-steps">
-                <span class="hp-step-dot active">1</span>
-                <span class="hp-step-line"></span>
-                <span class="hp-step-dot inactive">2</span>
-                <span class="hp-step-line"></span>
-                <span class="hp-step-dot inactive">3</span>
-              </div>
-              <div class="hp-step-label">STEP 1 · PLATFORM SCAN</div>
-              <div class="hp-title">Agent scans platform registry</div>
+              <div class="hp-title">Your agent scans.</div>
               <div class="hp-card">
                 <div class="hp-card-label">AGENT</div>
-                <div class="hp-card-value">agt_openclaw_01</div>
-              </div>
-              <div class="hp-card">
-                <div class="hp-card-label">INTENT</div>
-                <div class="hp-card-value">Security Token Investment</div>
+                <div class="hp-card-value">Alex Morgan</div>
               </div>
               <div class="hp-card">
                 <div class="hp-card-label">BUDGET</div>
-                <div class="hp-card-value">€ 5,000 EURC</div>
-              </div>
-              <div class="hp-card">
-                <div class="hp-card-label">REGION</div>
-                <div class="hp-card-value">EU · MiFID II Jurisdiction</div>
+                <div class="hp-card-value">€500+ EUR</div>
               </div>
               <div class="hp-checks">
-                <div class="hp-check"><span class="hp-tick">✓</span><span>Scanning investment platforms…</span></div>
-                <div class="hp-check"><span class="hp-tick">✓</span><span>Filtering: MiFID II + AI Act audit trail</span></div>
-                <div class="hp-check"><span class="hp-tick">✓</span><span>Match found: tokenforge (Score 920)</span></div>
+                <div class="hp-status">Scanning.</div>
+                <div class="hp-check"><span class="hp-tick">✓</span><span>Banks.</span></div>
+                <div class="hp-check"><span class="hp-pending"></span><span>RWA platforms.</span></div>
+                <div class="hp-check"><span class="hp-pending"></span><span>Brokers.</span></div>
               </div>
             </div>
           </div>
@@ -812,58 +996,50 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   </div>
 </section>
 
-<!-- ADDRESSABLE MARKET · EU -->
-<section class="section market-section" id="market">
-  <div class="container">
-    <div class="market-divider"></div>
-    <div class="market-grid">
-      <div class="market-stat">
-        <div class="ms-num">5,000<span class="ms-plus">+</span></div>
-        <div class="ms-desc">regulated financial<br>institutions in EU<br>(potential validators)</div>
-      </div>
-      <div class="market-stat">
-        <div class="ms-num">€ 33.7T</div>
-        <div class="ms-desc">EU assets under<br>management<br>(TAM)</div>
-      </div>
-      <div class="market-stat">
-        <div class="ms-num">27</div>
-        <div class="ms-desc">EU member states<br>covered by single<br>MiFID II + AI Act framework</div>
-      </div>
-      <div class="market-stat">
-        <div class="ms-num">450M<span class="ms-plus">+</span></div>
-        <div class="ms-desc">projected agents<br>by 2030 — one per<br>EU resident</div>
-      </div>
-    </div>
-    <div class="market-sources">Sources: EBA register · Eurostat · McKinsey Agentic Finance forecast · ECB AUM data 2024. Numbers represent addressable market — not Verun's current customer base.</div>
-  </div>
-</section>
 
-<!-- 3 MODES -->
-<section class="section modes-section" id="how">
+<!-- MARKET STATS (TAM / institutions / coverage / projected agents) -->
+<section class="section market-stats" id="market" style="background:var(--bg);padding:60px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="container">
-    <h2 class="section-h2">Three modes. <span class="muted">One protocol.</span></h2>
-    <div class="modes-grid">
-      <div class="mode-card">
-        <div class="mode-num">01 · Discovery</div>
-        <div class="mode-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.5" y2="16.5"/></svg></div>
-        <div class="mode-title">Agent finds the platform</div>
-        <div class="mode-desc">Agent scans the verified platform registry, filters by MiFID II + AI Act audit trail, identifies optimal match. No human input required.</div>
+    <div class="market-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;max-width:1180px;margin:0 auto">
+      <div>
+        <div style="font-size:48px;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1;margin-bottom:14px">5,000<span style="color:var(--teal)">+</span></div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.5">regulated financial institutions in EU <span style="color:var(--text3)">(potential validators)</span></div>
       </div>
-      <div class="mode-card">
-        <div class="mode-num">02 · Supervised</div>
-        <div class="mode-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7B61FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
-        <div class="mode-title">Human reviews and approves</div>
-        <div class="mode-desc">Structured referral with platform score, risk tier, proposed action. One-click approve or deny. Audit trail anchored on Stellar.</div>
+      <div>
+        <div style="font-size:48px;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1;margin-bottom:14px">€ 33.7T</div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.5">EU assets under management <span style="color:var(--text3)">(TAM)</span></div>
       </div>
-      <div class="mode-card">
-        <div class="mode-num">03 · Autonomous</div>
-        <div class="mode-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#d97706" stroke="#d97706" stroke-width="1.5" stroke-linejoin="round"><polygon points="13,2 4,14 11,14 10,22 20,9 13,9"/></svg></div>
-        <div class="mode-title">Agent runs fully automated</div>
-        <div class="mode-desc">Within policy bounds set by human. Revocable. Continuous monitoring. Every transaction logged on-chain. AI Act Art. 14 compliant by design.</div>
+      <div>
+        <div style="font-size:48px;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1;margin-bottom:14px">27</div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.5">EU member states covered by single MiFID II + AI Act framework</div>
       </div>
+      <div>
+        <div style="font-size:48px;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1;margin-bottom:14px">450M<span style="color:var(--teal)">+</span></div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.5">projected agents by 2030 — one per EU resident</div>
+      </div>
+    </div>
+    <div style="max-width:1180px;margin:32px auto 0;font-size:12px;color:var(--text3);font-family:var(--mono);line-height:1.6">
+      Sources: EBA · Eurostat · McKinsey · ECB 2024 · addressable market, not current customer base
     </div>
   </div>
 </section>
+<style>
+@media(max-width:1024px){
+  .market-stats .market-grid{grid-template-columns:repeat(2,1fr) !important;gap:32px 24px !important}
+  .market-stats .market-grid > div > div:first-child{font-size:38px !important}
+}
+@media(max-width:560px){
+  .market-stats{padding:40px 0 !important}
+  .market-stats .market-grid{grid-template-columns:repeat(2,1fr) !important;gap:24px 16px !important}
+  .market-stats .market-grid > div > div:first-child{font-size:28px !important;margin-bottom:6px !important;letter-spacing:-0.025em !important}
+  .market-stats .market-grid > div > div:last-child{font-size:11px !important;line-height:1.4 !important}
+  .market-stats div[style*="font-family:var(--mono)"]{font-size:10px !important;margin-top:20px !important;line-height:1.55 !important}
+}
+@media(max-width:380px){
+  .market-stats .market-grid > div > div:first-child{font-size:26px !important}
+  .market-stats .market-grid > div > div:last-child{font-size:10.5px !important}
+}
+</style>
 
 <!-- DEMO -->
 <section class="section demo-section" id="demo">
@@ -892,89 +1068,248 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   </div>
 </section>
 
-<!-- AGENT QUICKSTART -->
-<section class="section" id="quickstart" style="background:var(--bg2)">
+<!-- Architecture section removed -->
+
+<!-- x402 COMMERCE SECTION -->
+<section class="section" id="x402" style="background:linear-gradient(180deg,#faf5ff 0%,#f3f4ff 100%);padding:80px 0;border-top:1px solid var(--border)">
   <div class="container">
-    <h2 class="section-h2">Test the network <span class="muted">in 3 seconds.</span></h2>
-    <p class="section-sub" style="margin-bottom:40px">Give it to your agent — or paste it in your terminal yourself.</p>
-    <div style="background:linear-gradient(135deg,rgba(22,163,74,0.02) 0%,rgba(22,163,74,0.005) 30%,#ffffff 50%);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;max-width:860px;box-shadow:var(--shadow-md)">
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--border);background:var(--bg3)">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="width:11px;height:11px;border-radius:50%;background:#FF5F57;display:inline-block"></span>
-          <span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E;display:inline-block"></span>
-          <span style="width:11px;height:11px;border-radius:50%;background:#28C840;display:inline-block"></span>
-          <span style="font-family:var(--mono);font-size:12px;color:var(--text3);margin-left:8px">verun · live testnet</span>
+    <h2 class="section-h2" style="text-align:center;margin-bottom:14px;margin-top:12px">
+      Pay-per-evaluation. <span class="muted">Agent-native commerce.</span>
+    </h2>
+    <p class="section-sub" style="text-align:center;max-width:680px;margin:0 auto 40px;font-size:17px;color:var(--text2)">
+      An agent pays <strong>0.005 USDC</strong> via x402.
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:32px;max-width:920px;margin:0 auto;align-items:start" class="x402-grid">
+      <!-- LEFT: interactive terminal -->
+      <div>
+        <div style="background:#0a2540;color:#cbd5e1;border-radius:14px;padding:0;overflow:hidden;box-shadow:var(--shadow-lg);font-family:var(--mono)">
+          <div style="background:#1e293b;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #334155">
+            <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#febc2e"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#28c840"></span>
+            <span style="font-size:11px;color:#94a3b8;margin-left:8px">agent · x402 live terminal</span>
+            <span id="x402-status" style="margin-left:auto;font-size:10px;color:#7c3aed;font-weight:700;letter-spacing:0.08em">READY</span>
+          </div>
+          <pre id="x402-terminal" style="margin:0;padding:18px 20px;font-size:12px;line-height:1.7;color:#e2e8f0;white-space:pre-wrap;word-break:break-word;min-height:340px;max-height:480px;overflow-y:auto"><span style="color:#94a3b8"># Click "Run x402 Evaluation" to fire a live request.
+# Server issues HTTP 402 → agent pays → consensus runs → anchor on Stellar.
+# All transactions are live on Stellar testnet.</span></pre>
         </div>
-        <button onclick="copyAgentPrompt()" id="copy-btn" style="font-family:var(--sans);font-size:12px;font-weight:700;padding:6px 16px;border-radius:8px;border:1px solid var(--teal-border);background:var(--teal-dim);color:var(--teal);cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0">Copy Command</button>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+          <button id="btn-x402-run" onclick="runX402Full()" class="btn btn-teal" style="padding:11px 20px;font-size:14px;background:#7c3aed;box-shadow:0 4px 14px rgba(124,58,237,0.3)">
+            Run x402 Evaluation →
+          </button>
+          <button onclick="resetX402()" style="background:transparent;border:0;color:var(--text2);font-size:12px;text-decoration:underline;cursor:pointer">reset</button>
+        </div>
       </div>
-      <pre id="agent-prompt-text" style="margin:0;padding:24px 26px;font-family:var(--mono);font-size:13px;line-height:1.75;color:var(--text2);white-space:pre-wrap;word-break:break-word;overflow-x:auto">curl -s -X POST https://www.erster.fund/api/evaluate \
-  -H "Content-Type: application/json" \
-  -d '{"agentId":"agt_openclaw_01","score":720,"operation":"transfer"}' | \
-python3 -c "
-import sys, json
-r = json.load(sys.stdin)
-v, a = r['verdict'], r['anchor']
-print()
-print('   Success         :', r['success'])
-print('   Consensus       :', v['consensus'])
-print('   Permitted       :', v['permitted'])
-print('   Validators      : 3/3')
-print('   TXID            :', a['txid'])
-print('   Stellar Expert  :', a['explorer'])
-print()
-print('  → Click the Stellar Expert link to see the live transaction.')
-"</pre>
+      <!-- Right column (ACCEPTED PAYMENT SCHEMES box) removed -->
     </div>
   </div>
 </section>
 
-<!-- PLATFORM REGISTRY -->
-<section class="section platform-section" id="platforms">
+<!-- PRICING -->
+<section class="section pricing-section" id="pricing" style="background:var(--bg);padding:90px 0;border-top:1px solid var(--border)">
   <div class="container">
-    <h2 class="section-h2">Regulated institutions <span class="muted">validate your agent.</span></h2>
-    <p class="section-sub">Two founding validators + one open slot for institutional partners.</p>
-    <div class="platform-grid">
-      <div class="platform-card featured">
-        <div class="plat-name" style="margin-bottom:14px">tokenforge</div>
-        <div class="plat-desc">White-label Security Token platform (TokenSuite).</div>
-        <div class="plat-badge"><span class="dot"></span>Founding Validator</div>
+    <h2 class="section-h2" style="text-align:center;margin-bottom:48px">Pricing</h2>
+    <div class="pricing-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:760px;margin:0 auto">
+      <!-- RETAIL -->
+      <div class="pricing-card" style="position:relative;background:#fff;border:1px solid var(--border);border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:var(--mono);font-size:13.5px;font-weight:800;color:var(--text3);letter-spacing:0.14em">RETAIL</div>
+        <div style="display:flex;align-items:baseline;gap:4px">
+          <span class="pc-price">$0.005</span>
+          <span style="font-size:14px;color:var(--text3);font-weight:600">/call</span>
+        </div>
+        <div style="height:1px;background:var(--border);margin:4px 0"></div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.55">Find investments.</div>
       </div>
-      <div class="platform-card">
-        <div class="plat-name" style="margin-bottom:14px">ERSTER</div>
-        <div class="plat-desc">EU tokenization platform · operated by BCP Partners GmbH, Berlin.</div>
-        <div class="plat-badge"><span class="dot"></span>Founding Validator</div>
-      </div>
-      <div class="platform-card">
-        <div class="plat-name" style="margin-bottom:14px">Open Slot</div>
-        <div class="plat-desc">Banks, brokers, neobanks, exchanges.</div>
-        <a href="https://www.bcpp.io/contact-us" target="_blank" class="plat-apply">Apply →</a>
+      <!-- INSTITUTION -->
+      <div class="pricing-card" style="position:relative;background:#fff;border:1px solid var(--border);border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:var(--mono);font-size:13.5px;font-weight:800;color:var(--text3);letter-spacing:0.14em">INSTITUTION</div>
+        <div style="display:flex;align-items:baseline;gap:4px">
+          <span class="pc-price">5 bps</span>
+          <span style="font-size:14px;color:var(--text3);font-weight:600">/deal</span>
+        </div>
+        <div style="height:1px;background:var(--border);margin:4px 0"></div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.55">Get found by agents.</div>
       </div>
     </div>
   </div>
 </section>
 
+<style>
+/* Pricing card price numbers — guaranteed uniform across all 3 cards */
+.pc-price{font-size:34px;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1}
+@media(max-width:760px){
+  .pricing-section{padding:48px 0 !important}
+  .pricing-grid{grid-template-columns:1fr !important;gap:12px !important;max-width:420px !important}
+  .pricing-card{padding:20px 18px !important;gap:8px !important}
+  .pc-price{font-size:30px !important}
+  /* Target ONLY the /mo span (2nd child) — skip when there's a single span like $0 */
+  .pricing-card div[style*="display:flex;align-items:baseline"] span:nth-child(2){font-size:13px !important}
+}
+</style>
+
+<!-- Team section removed -->
+
+<!-- ERSTER moved to Section 1 (see above) -->
+
+
+
+<!-- INLINE WAITLIST FORM (mobile only — shows before footer) -->
+<section class="inline-waitlist" id="inline-waitlist">
+  <div class="container">
+    <h2 class="iw-h2">Join the Verun <span class="muted">waitlist.</span></h2>
+    <p class="iw-sub">The trust layer for AI agents. Be the first to know when we open up.</p>
+    <div class="iw-card">
+      <h3>We'll send project updates.</h3>
+      <form id="iwForm" action="https://formsubmit.co/fahad@bcpp.io" method="POST">
+        <input type="hidden" name="_subject" value="New Verun Waitlist Signup">
+        <input type="hidden" name="_cc" value="rafael@bcpp.io,nils@bcpp.io">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://www.erster.fund/waitlist.html?ok=1">
+        <input type="hidden" name="source" value="www.erster.fund/inline-mobile">
+        <input type="checkbox" name="botcheck" class="iw-honeypot" tabindex="-1" autocomplete="off">
+        <input id="iw-name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+        <input id="iw-email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+        <button type="submit" class="iw-btn">Join waitlist →</button>
+      </form>
+    </div>
+  </div>
+</section>
+<style>
+  /* Hidden by default (desktop/tablet) — only visible on mobile */
+  .inline-waitlist{display:none}
+  @media(max-width:760px){
+    .inline-waitlist{display:block;background:var(--bg2);padding:60px 0 48px;border-top:1px solid var(--border)}
+    .inline-waitlist .iw-h2{font-size:34px;font-weight:800;line-height:1.06;letter-spacing:-0.025em;color:var(--text);margin:0 0 14px}
+    .inline-waitlist .iw-h2 .muted{color:var(--text3);font-weight:700}
+    .inline-waitlist .iw-sub{font-size:15px;color:var(--text2);line-height:1.5;margin:0 0 26px;max-width:520px}
+    .inline-waitlist .iw-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--shadow-sm)}
+    .inline-waitlist .iw-card h3{margin:0 0 18px;font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.01em}
+    .inline-waitlist #iwForm input[type=text],
+    .inline-waitlist #iwForm input[type=email]{width:100%;font-family:inherit;font-size:15px;padding:13px 16px;background:#fff;border:1px solid var(--border-strong);border-radius:10px;color:var(--text);margin-bottom:12px;transition:border-color .15s,box-shadow .15s}
+    .inline-waitlist #iwForm input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(22,163,74,0.15)}
+    .inline-waitlist #iwForm input::placeholder{color:#9ca3af}
+    .inline-waitlist .iw-honeypot{display:none !important}
+    .inline-waitlist .iw-btn{width:100%;padding:14px 20px;background:var(--teal);color:#fff;border:0;border-radius:10px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;margin-top:6px;box-shadow:0 6px 16px rgba(22,163,74,0.25);transition:background .15s,transform .1s}
+    .inline-waitlist .iw-btn:hover{background:#15803d}
+    .inline-waitlist .iw-btn:active{transform:translateY(1px)}
+  }
+</style>
 
 <!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-inner">
       <div>
-        <div class="footer-brand" style="letter-spacing:0.12em">ERSTER</div>
+        <div class="footer-brand" style="letter-spacing:0.12em">VERUN</div>
         <div style="font-size:11px;color:var(--text3);margin-top:4px;font-family:var(--mono)">© 2026 BCP Partners GmbH · All rights reserved</div>
       </div>
       <div class="footer-links">
         <a href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
-        <a href="#platforms">Platforms</a>
-        <a href="https://github.com/Fahad00674/verun-stellar-mvp" target="_blank">GitHub</a>
+        <a href="#x402">x402</a>
+        <a href="https://github.com/rafaschul/verun-stellar-mvp" target="_blank">GitHub</a>
         <a href="/docs.html" target="_blank">Tech Docs</a>
         <a href="https://www.bcpp.io/contact-us" target="_blank">Contact</a>
       </div>
-      <div class="footer-note">Stellar Testnet · v0.1.0</div>
+      <div class="footer-note">Stellar Testnet · x402 · v0.1.0</div>
     </div>
   </div>
 </footer>
 
 <script>
+// ─── x402 INTERACTIVE DEMO (live calls to /api/x402/* + /api/evaluate) ──
+function _x402WriteLine(text, color = '#e2e8f0') {
+  const term = document.getElementById('x402-terminal');
+  if (!term) return;
+  const line = document.createElement('div');
+  line.style.color = color;
+  line.textContent = text;
+  term.appendChild(line);
+  term.scrollTop = term.scrollHeight;
+}
+function _x402WriteRaw(html) {
+  const term = document.getElementById('x402-terminal');
+  if (!term) return;
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  term.appendChild(div);
+  term.scrollTop = term.scrollHeight;
+}
+function _x402SetStatus(text, color = '#7c3aed') {
+  const s = document.getElementById('x402-status');
+  if (s) { s.textContent = text; s.style.color = color; }
+}
+function resetX402() {
+  const term = document.getElementById('x402-terminal');
+  if (term) term.innerHTML = '<span style="color:#94a3b8"># Click "Run x402 Evaluation" to fire a live request.\n# Server issues HTTP 402 → agent pays → consensus runs → anchor on Stellar.\n# All transactions are live on Stellar testnet.</span>';
+  _x402SetStatus('READY', '#7c3aed');
+  const btn = document.getElementById('btn-x402-run');
+  if (btn) btn.disabled = false;
+}
+async function runX402Full() {
+  const btn = document.getElementById('btn-x402-run');
+  btn.disabled = true;
+  const term = document.getElementById('x402-terminal');
+  if (term) term.innerHTML = '';
+  // ── Phase 1: trigger HTTP 402 ────────────────────────────────────
+  _x402SetStatus('REQUESTING…', '#fbbf24');
+  _x402WriteLine('$ curl -i https://www.erster.fund/api/x402/evaluate', '#a78bfa');
+  _x402WriteLine('');
+  try {
+    const res = await fetch('/api/x402/evaluate', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+    const body = await res.json();
+    _x402WriteLine(`HTTP/${res.status === 402 ? '1.1 402 Payment Required' : res.status}`, res.status === 402 ? '#fbbf24' : '#34d399');
+    const facHdr = res.headers.get('x-402-powered');
+    if (facHdr) _x402WriteLine('X-402-Powered: ' + facHdr, '#94a3b8');
+    _x402WriteLine('');
+    _x402WriteLine('// paymentRequirements (schemes accepted)', '#94a3b8');
+    body.accepts.forEach((a, i) => {
+      const asset = a.extra?.name || a.asset;
+      const amt = (Number(a.maxAmountRequired) / 1e6).toFixed(2);
+      _x402WriteRaw(`<span style="color:#fbbf24">  scheme ${i + 1}:</span> <span style="color:#34d399">${a.scheme}</span> · <span style="color:#a78bfa">${a.network.split(':')[0]}</span> · <span style="color:#e2e8f0;font-weight:700">${amt} ${asset}</span> <span style="color:#94a3b8">→ ${a.extra?.facilitator || a.extra?.provider || '—'}</span>`);
+    });
+    _x402WriteLine('');
+    _x402SetStatus('402 RECEIVED', '#fbbf24');
+    // ── Phase 2: paid evaluation (auto-chained) ───────────────────
+    await new Promise(r => setTimeout(r, 600));
+    _x402WriteLine('# Agent signs PaymentTxn + retries with X-PAYMENT header →', '#94a3b8');
+    _x402WriteLine('$ curl -X POST /api/evaluate  # paid call → run consensus + anchor', '#a78bfa');
+    _x402WriteLine('# (in production: -H "X-PAYMENT: $SIGNED_TXN_BASE64")', '#94a3b8');
+    _x402WriteLine('');
+    _x402SetStatus('EVALUATING…', '#fbbf24');
+    const payload = { agentId: 'agt_demo', score: 820, operation: 'transfer', validatorIds: ['val-erster-01', 'val-tokenforge-02', 'val-test-03'] };
+    const res2 = await fetch('/api/evaluate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const data = await res2.json();
+    const verdict = data.verdict || {};
+    const anchor = data.anchor || {};
+    _x402WriteLine('HTTP/1.1 200 OK', '#34d399');
+    _x402WriteLine('');
+    _x402WriteRaw(`<span style="color:#94a3b8">// verdict</span>`);
+    _x402WriteRaw(`  consensus  : <span style="color:#34d399;font-weight:700">${verdict.consensus || 'n/a'}</span>`);
+    _x402WriteRaw(`  permitted  : <span style="color:#34d399;font-weight:700">${String(verdict.permitted)}</span>`);
+    _x402WriteRaw(`  validators : <span style="color:#a78bfa">${(verdict.validators_used || []).map(v => v.name).join(' · ')}</span>`);
+    _x402WriteRaw(`  kickback   : <span style="color:#fbbf24">${verdict.kickback_rate}%</span>`);
+    _x402WriteLine('');
+    _x402WriteRaw(`<span style="color:#94a3b8">// anchor (Stellar Testnet)</span>`);
+    if (anchor.txid) {
+      _x402WriteRaw(`  txid      : <span style="color:#34d399">${anchor.txid}</span>`);
+      _x402WriteRaw(`  round     : <span style="color:#a78bfa">${anchor.round || ''}</span>`);
+      _x402WriteRaw(`  explorer  : <a href="${anchor.explorer}" target="_blank" style="color:#60a5fa;text-decoration:underline">${anchor.explorer}</a>`);
+      _x402SetStatus('200 · ANCHORED', '#34d399');
+    } else {
+      _x402WriteRaw(`  status    : <span style="color:#fbbf24">${anchor.status || 'unavailable'}</span>`);
+      if (anchor.error) _x402WriteRaw(`  error     : <span style="color:#f87171">${anchor.error}</span>`);
+      _x402SetStatus('200 · NO ANCHOR', '#fbbf24');
+    }
+  } catch (e) {
+    _x402WriteLine('ERROR: ' + e.message, '#f87171');
+    _x402SetStatus('ERROR', '#f87171');
+    btn.disabled = false;
+  }
+}
+
 // ─── STATE ──────────────────────────────────────────────
 let currentMode = 'supervised';
 let currentStep = 1;
@@ -1015,12 +1350,12 @@ const MODES = {
 function anchorBoxHTML(label) {
   const tx = lastLiveEvaluation?.anchor?.txid;
   const explorer = lastLiveEvaluation?.anchor?.explorer
-    || (tx ? `https://stellar.expert/explorer/testnet/tx/${tx}` : null);
+    || (tx ? `https://stellar.expert/testnet/tx/${tx}` : null);
   if (tx && explorer) {
     return `<div class="tx-box">
       <div class="tx-label">${label}</div>
       <div class="tx-hash"><a href="${explorer}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px dashed currentColor">${tx}</a></div>
-      <div class="tx-link"><a href="${explorer}" target="_blank" rel="noopener">↗ View on Stellar Expert Testnet</a></div>
+      <div class="tx-link"><a href="${explorer}" target="_blank" rel="noopener">↗ View on Lora Explorer Testnet</a></div>
     </div>`;
   }
   return `<div class="tx-box" style="opacity:0.85">
@@ -1156,7 +1491,7 @@ async function runLiveDemo() {
     addLog('ok','OK',`consensus: ${verdict.consensus || 'n/a'} · permitted: ${String(verdict.permitted)}`,'green');
     if (tx) {
       addLog('tx','TX',`anchor txid: ${tx}`,'teal');
-      addLog('tx','TX',anchor.explorer || `https://stellar.expert/explorer/testnet/tx/${tx}`,'dim');
+      addLog('tx','TX',anchor.explorer || `https://stellar.expert/testnet/tx/${tx}`,'dim');
     } else {
       addLog('warn','WARN',`anchor: ${anchor.status || 'unavailable'} ${anchor.error ? `(${anchor.error})` : ''}`,'amber');
     }
@@ -1188,8 +1523,8 @@ function renderDiscover(body) {
       </div>
       <div class="info-card">
         <div class="ic-row"><span class="ic-label">Agent</span><span class="ic-val teal">agt_openclaw_01</span></div>
-        <div class="ic-row"><span class="ic-label">Intent</span><span class="ic-val">Security Token Investment</span></div>
-        <div class="ic-row"><span class="ic-label">Budget</span><span class="ic-val">€ 5,000 EURC</span></div>
+        <div class="ic-row"><span class="ic-label">Intent</span><span class="ic-val">SpaceX Pre-IPO Shares</span></div>
+        <div class="ic-row"><span class="ic-label">Budget</span><span class="ic-val">€500,000+ EUR</span></div>
         <div class="ic-row"><span class="ic-label">Region</span><span class="ic-val">EU · MiFID II Jurisdiction</span></div>
       </div>
       <ul class="check-list" id="cl1">
@@ -1206,7 +1541,7 @@ function renderDiscover(body) {
     });
     queueLogs([
       ['agent','AGENT','agt_openclaw_01 initialised','teal'],
-      ['agent','AGENT','intent: Security Token Investment · €5,000','dim'],
+      ['agent','AGENT','intent: SpaceX Pre-IPO Shares · €500,000+','dim'],
       ['verun','VERUN','scanning platform registry...','purple'],
       ['verun','VERUN','filter: MiFID II + AI Act trail · EU jurisdiction','dim'],
       ['ok','MATCH','tokenforge → score: 920 · VERIFIED','green'],
@@ -1221,7 +1556,7 @@ function renderDiscover(body) {
       <div class="info-card">
         <div class="ic-row"><span class="ic-label">Platform</span><span class="ic-val teal">tokenforge</span></div>
         <div class="ic-row"><span class="ic-label">Trust Score</span><span class="ic-val" style="color:var(--teal);font-size:17px;font-weight:700">920 / 1000</span></div>
-        <div class="ic-row"><span class="ic-label">Type</span><span class="ic-val">Security Token · Investment</span></div>
+        <div class="ic-row"><span class="ic-label">Type</span><span class="ic-val">SpaceX Pre-IPO Shares</span></div>
         <div class="ic-row"><span class="ic-label">Compliance</span><span class="ic-val green">eWpG · BaFin · MiFID II</span></div>
       </div>
       <div class="score-bar-wrap">
@@ -1259,7 +1594,7 @@ function renderDiscover(body) {
       <div class="code-block"><span class="k">"to"</span>:       <span class="s">"human_rafael"</span>,
 <span class="k">"from"</span>:     <span class="s">"agt_openclaw_01"</span>,
 <span class="k">"platform"</span>: <span class="s">"tokenforge"</span>,
-<span class="k">"action"</span>:   <span class="s">"invest €5,000 EURC"</span>,
+<span class="k">"action"</span>:   <span class="s">"invest €500,000+ in SpaceX Pre-IPO Shares"</span>,
 <span class="k">"score"</span>:    <span class="v">${lastLiveEvaluation?.verdict?.score ?? 920}</span>,
 <span class="k">"consensus"</span>:<span class="v">"${consensus}"</span>,
 <span class="k">"status"</span>:   <span class="s">"awaiting_approval"</span></div>
@@ -1288,11 +1623,11 @@ function renderSupervised(body) {
       </div>
       <div class="human-action">
         <div class="ha-label">👤 Human Dashboard · Notification</div>
-        <div class="ha-msg">Your agent <strong>agt_openclaw_01</strong> recommends investing <strong>€5,000 EURC</strong> via <strong>tokenforge</strong>.<br><br>Platform Trust Score: <strong style="color:var(--teal)">920/1000</strong> · MiFID II + AI Act audit trail · eWpG verified.</div>
+        <div class="ha-msg">Your agent <strong>agt_openclaw_01</strong> recommends investing <strong>€500,000+</strong> in <strong>SpaceX Pre-IPO Shares</strong> via <strong>tokenforge</strong>.<br><br>Platform Trust Score: <strong style="color:var(--teal)">920/1000</strong> · MiFID II + AI Act audit trail · eWpG verified.</div>
       </div>
       <div class="info-card">
         <div class="ic-row"><span class="ic-label">Platform</span><span class="ic-val teal">tokenforge · tokenforge.io</span></div>
-        <div class="ic-row"><span class="ic-label">Action</span><span class="ic-val">Invest €5,000 EURC</span></div>
+        <div class="ic-row"><span class="ic-label">Action</span><span class="ic-val">Invest in SpaceX Pre-IPO</span></div>
         <div class="ic-row"><span class="ic-label">Risk Tier</span><span class="ic-val green">LOW (Score 920)</span></div>
         <div class="ic-row"><span class="ic-label">Verun Verdict</span><span class="ic-val green">VERIFIED · 3/3 Validators</span></div>
       </div>
@@ -1335,14 +1670,14 @@ function renderSupervised(body) {
       <div class="verdict-box approved">
         <div class="verdict-icon">✅</div>
         <div class="verdict-title green">Transaction Executed · Approved</div>
-        <div class="verdict-sub green">€5,000 EURC → tokenforge · anchored on-chain</div>
+        <div class="verdict-sub green">SpaceX Pre-IPO · €500,000+ EUR → tokenforge · anchored on-chain</div>
       </div>
       ${anchorBoxHTML('Stellar Anchor · Approval TX')}
       <div class="progress-wrap"><div class="progress-fill teal" id="prog-s3"></div></div>
     </div>`;
     setTimeout(()=>{const p=document.getElementById('prog-s3');if(p)p.style.width='100%';},100);
     queueLogs([
-      ['human','HUMAN','approved: invest €5,000 EURC on tokenforge','amber'],
+      ['human','HUMAN','approved: invest €500,000+ in SpaceX Pre-IPO on tokenforge','amber'],
       ['tx','TX','anchoring approval on Stellar...','teal'],
       ['ok','OK','approval anchored · ~3.6s','green'],
       ['ok','OK','transaction executed · MiFID II + AI Act audit trail written','green'],
@@ -1358,7 +1693,7 @@ function humanApprove(autoMode) {
     addLog('human','HUMAN','granted: AUTONOMOUS MODE for tokenforge','amber');
     addLog('verun','VERUN','policy stored on Stellar · agent unlocked','purple');
   } else {
-    r.innerHTML = `<div class="verdict-box approved"><div class="verdict-icon">✅</div><div class="verdict-title green">One-time Approval Granted</div><div class="verdict-sub green">Executing: €5,000 EURC → tokenforge</div></div>`;
+    r.innerHTML = `<div class="verdict-box approved"><div class="verdict-icon">✅</div><div class="verdict-title green">One-time Approval Granted</div><div class="verdict-sub green">Executing: €500,000+ EUR → SpaceX Pre-IPO via tokenforge</div></div>`;
     addLog('human','HUMAN','approved: one-time transaction','amber');
   }
 }
@@ -1386,13 +1721,13 @@ function renderAuto(body) {
       <div class="info-card">
         <div class="ic-row"><span class="ic-label">Agent</span><span class="ic-val purple">agt_openclaw_01</span></div>
         <div class="ic-row"><span class="ic-label">Platform</span><span class="ic-val teal">tokenforge</span></div>
-        <div class="ic-row"><span class="ic-label">Max per TX</span><span class="ic-val">€ 10,000 EURC</span></div>
+        <div class="ic-row"><span class="ic-label">Max per TX</span><span class="ic-val">€ 10,000 USDC</span></div>
         <div class="ic-row"><span class="ic-label">Revokable</span><span class="ic-val green">Yes · anytime</span></div>
       </div>
     </div>`;
     queueLogs([
       ['auto','AUTO','autonomous mode loaded','purple'],
-      ['auto','AUTO','policy: tokenforge · max €10,000/tx · EURC','dim'],
+      ['auto','AUTO','policy: tokenforge · max €10,000/tx · USDC','dim'],
       ['verun','VERUN','policy anchor confirmed on Stellar','purple'],
       ['auto','AUTO','agent agt_openclaw_01 ready to execute','teal'],
     ]);
@@ -1404,11 +1739,11 @@ function renderAuto(body) {
         <div class="step-title">Agent executes without human input</div>
       </div>
       <ul class="check-list" id="cl-auto">
-        <li id="ca-1">Policy check: tokenforge · €3,200 EURC ✓</li>
+        <li id="ca-1">Policy check: tokenforge · €3,200 USDC ✓</li>
         <li id="ca-2">Verun score re-validated: 920 (cached 4h)</li>
         <li id="ca-3">x402 micro-fee paid · access granted</li>
         <li id="ca-4">Transaction initiated on tokenforge Chain API</li>
-        <li id="ca-5">Settlement: EURC → tokenforge wallet</li>
+        <li id="ca-5">Settlement: USDC → tokenforge wallet</li>
       </ul>
     </div>`;
     [0,350,700,1050,1400].forEach((t,i)=>{
@@ -1418,7 +1753,7 @@ function renderAuto(body) {
       },t);
     });
     queueLogs([
-      ['auto','AUTO','executing: invest €3,200 EURC on tokenforge','purple'],
+      ['auto','AUTO','executing: invest €3,200 in SpaceX Pre-IPO on tokenforge','purple'],
       ['verun','VERUN','policy check: within bounds','dim'],
       ['verun','VERUN','score cache: 920 · valid 4h · skip re-eval','dim'],
       ['auto','AUTO','x402 fee paid · tokenforge API called','teal'],

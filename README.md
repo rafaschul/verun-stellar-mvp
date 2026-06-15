@@ -46,6 +46,16 @@ chmod +x scripts/smoke-live.sh
 | POST | `/api/revoke-sbt`      | Revoke a credential (kill-switch) |
 | GET  | `/api/sbt-status`      | Check credential status for an agent |
 | GET  | `/api/sbt-list`        | List all issued credentials |
+| GET/POST | `/api/x402/evaluate` | x402 payment-gated evaluation (HTTP 402 → pay → verdict + anchor) |
+
+## x402 Payment Layer
+
+`/api/x402/evaluate` implements the [x402 spec](https://docs.x402.org) for agent-native commerce:
+
+- **Without `X-PAYMENT` header** → returns HTTP `402 Payment Required` + `paymentRequirements` (USDC + XLM schemes accepted)
+- **With `X-PAYMENT` header** → verifies + settles via Stellar x402 Facilitator, runs Verun 2-of-3 consensus, anchors verdict, returns `{ verdict, anchor, settlement }`
+
+Pricing defaults: `0.005 USDC` or `0.005 XLM` per evaluation (override via `X402_PRICE_USDC` / `X402_PRICE_XLM`).
 
 ## Environment variables
 
