@@ -18,8 +18,8 @@ const {
   facilitatorVerify,
   facilitatorSettle,
   FACILITATOR_URL,
+  PRICE_USD,
   PRICE_USDC,
-  PRICE_XLM,
   NETWORK_KIND,
   SIMULATE,
 } = require('../../src/x402');
@@ -39,13 +39,13 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Build paymentRequirements for this resource
+  // Build paymentRequirements for this resource (async — fetches market price)
   let paymentRequirements;
   try {
-    paymentRequirements = buildPaymentRequirements({
+    paymentRequirements = await buildPaymentRequirements({
       resource: '/api/x402/evaluate',
       description:
-        `Verun Trust Evaluation · ${PRICE_USDC} USDC or ${PRICE_XLM} XLM · ` +
+        `Verun Trust Evaluation · $${PRICE_USD} USDC or market-equivalent XLM · ` +
         `2-of-3 validator consensus + audit anchor on Stellar ${NETWORK_KIND}.`,
     });
   } catch (e) {

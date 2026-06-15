@@ -19,7 +19,19 @@ const {
   explorerTx,
 } = require('./stellar');
 
-const DEFAULT_ANCHOR_AMOUNT = process.env.X402_PRICE_XLM || '0.005';
+// Default anchor amount: market-rate XLM equivalent of $0.005 USD,
+// unless overridden by env (X402_PRICE_XLM) or opts.amount.
+const { convertUSDtoNative } = require('./priceOracle');
+const PRICE_USD = Number(process.env.X402_PRICE_USD || '0.005');
+const PRICE_XLM_FIXED = process.env.X402_PRICE_XLM ? Number(process.env.X402_PRICE_XLM) : null;
+
+async function resolveAnchorAmount(opts) {
+  if (opts.amount != null) return String(opts.amount);
+  if (PRICE_XLM_FIXED != null && Number.isFinite(PRICE_XLM_FIXED)) return String(PRICE_XLM_FIXED);
+  const xlm = await convertUSDtoNative(PRICE_USD, 'XLM');
+  // Round to 7 decimals (Stellar stroop precision) and strip trailing zeros
+  return parseFloat(xlm.toFixed(7)).toString();
+}
 
 async function anchorEvaluation(payload, opts = {}) {
   const server = getServer();
@@ -33,9 +45,9 @@ async function anchorEvaluation(payload, opts = {}) {
   const digest = crypto.createHash('sha256').update(json).digest(); // 32 bytes
   const account = await server.loadAccount(pub);
 
-  // Self-payment amount — defaults to the x402 XLM price so explorer reflects
-  // the demo evaluation price (0.005 XLM). Caller can override via opts.amount.
-  const amount = String(opts.amount || DEFAULT_ANCHOR_AMOUNT);
+  // Self-payment amount — defaults to market-rate XLM equivalent of $0.005 USD
+  // so the explorer visibly reflects the demo evaluation price.
+  const amount = await resolveAnchorAmount(opts);
 
   const tx = new StellarSdk.TransactionBuilder(account, {
     fee: StellarSdk.BASE_FEE,
