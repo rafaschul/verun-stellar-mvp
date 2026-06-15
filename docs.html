@@ -638,6 +638,16 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   <h2 id="ep-sbt-list">GET /api/sbt-list</h2>
   <p>Returns every active SBT issued by this protocol account. Useful for a public registry view — e.g. "all currently credentialed agents."</p>
 
+  <h2 id="ep-x402-evaluate">GET / POST /api/x402/evaluate</h2>
+  <p><strong>x402-paid trust evaluation.</strong> Implements the <a href="https://docs.x402.org" target="_blank">x402 spec</a> for agent-native commerce on Stellar. Without an <code>X-PAYMENT</code> header, returns <code>HTTP 402 Payment Required</code> plus <code>paymentRequirements</code> (USDC + XLM schemes accepted). With <code>X-PAYMENT</code>, verifies and settles via the Stellar x402 Facilitator, runs the 2-of-3 validator consensus, anchors the verdict, and returns <code>{ verdict, anchor, settlement }</code>.</p>
+  <p><strong>Pricing model</strong> (two-sided marketplace):</p>
+  <table class="api-table" style="margin-top:8px">
+    <tr><th>Side</th><th>Rate</th><th>What they get</th></tr>
+    <tr><td class="td-name">Retail (call)</td><td><code>$0.005 USDC</code> or <code>0.005 XLM</code> per call</td><td>Trust-scored investment search results</td></tr>
+    <tr><td class="td-name">Institution (deal)</td><td><code>5 bps (0.05%)</code> per closed deal</td><td>Qualified agent-sourced leads + audit trail</td></tr>
+  </table>
+  <p style="margin-top:12px"><strong>Schemes returned in 402</strong> are <code>x402Version: 1</code>, <code>scheme: exact</code>, CAIP-2 network IDs (<code>stellar:testnet</code> / <code>stellar:pubnet</code>), USDC (Circle issued asset) and native XLM. Override defaults via <code>X402_PRICE_USDC</code>, <code>X402_PRICE_XLM</code>, <code>X402_FACILITATOR_URL</code>.</p>
+
   <div class="next-prev"><button class="next-btn" onclick="show('anchor')"><div><span class="next-btn-lbl">Next</span>Stellar Anchor →</div></button></div>
 </div>
 
@@ -798,13 +808,14 @@ HTTP 404 Not Found</code></pre>
       <tr><td><span class="td-badge badge-post">POST</span></td><td class="td-name">/api/revoke-sbt</td><td>Kill-switch: clear credential entry</td></tr>
       <tr><td><span class="td-badge badge-get">GET</span></td><td class="td-name">/api/sbt-status?agentId=…</td><td>Check credential for one agent</td></tr>
       <tr><td><span class="td-badge badge-get">GET</span></td><td class="td-name">/api/sbt-list</td><td>List all credentialed agents</td></tr>
+      <tr><td><span class="td-badge badge-post">POST</span></td><td class="td-name">/api/x402/evaluate</td><td>x402 paid evaluation (USDC + XLM accepted)</td></tr>
     </tbody>
   </table>
 
   <h2>End-to-end demo (one command)</h2>
   <div class="code-block">
     <div class="code-header"><span>scripts/sbt-demo.sh</span></div>
-    <pre><code class="language-bash">git clone https://github.com/Fahad00674/verun-stellar-mvp
+    <pre><code class="language-bash">git clone https://github.com/rafaschul/verun-stellar-mvp
 cd verun-stellar-mvp &amp;&amp; chmod +x scripts/sbt-demo.sh
 ./scripts/sbt-demo.sh agt_fahad_001 720</code></pre>
   </div>
