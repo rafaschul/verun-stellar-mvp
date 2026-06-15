@@ -1,8 +1,12 @@
 /**
  * On-chain anchor for a Verun verdict on Stellar.
- * Strategy: 1-stroop self-payment whose memo is sha256(verdictPayload).
+ * Strategy: native-asset self-payment whose memo is sha256(verdictPayload).
  * Produces a real Stellar Testnet TX with explorer link — an immutable,
  * timestamped audit anchor for every evaluation.
+ *
+ * The self-payment amount defaults to the x402 XLM price (0.005 XLM by default)
+ * so the on-chain TX visibly reflects the evaluation price. Override via the
+ * `amount` option or the `X402_PRICE_XLM` env var.
  */
 require('dotenv').config();
 const crypto = require('crypto');
@@ -15,7 +19,9 @@ const {
   explorerTx,
 } = require('./stellar');
 
-async function anchorEvaluation(payload) {
+const DEFAULT_ANCHOR_AMOUNT = process.env.X402_PRICE_XLM || '0.005';
+
+async function anchorEvaluation(payload, opts = {}) {
   const server = getServer();
   const kp = getKeypair();
   const pub = kp.publicKey();
@@ -27,6 +33,10 @@ async function anchorEvaluation(payload) {
   const digest = crypto.createHash('sha256').update(json).digest(); // 32 bytes
   const account = await server.loadAccount(pub);
 
+  // Self-payment amount — defaults to the x402 XLM price so explorer reflects
+  // the demo evaluation price (0.005 XLM). Caller can override via opts.amount.
+  const amount = String(opts.amount || DEFAULT_ANCHOR_AMOUNT);
+
   const tx = new StellarSdk.TransactionBuilder(account, {
     fee: StellarSdk.BASE_FEE,
     networkPassphrase: NETWORK_PASSPHRASE,
@@ -35,7 +45,7 @@ async function anchorEvaluation(payload) {
       StellarSdk.Operation.payment({
         destination: pub,
         asset: StellarSdk.Asset.native(),
-        amount: '0.0000001', // 1 stroop self-payment
+        amount,
       })
     )
     .addMemo(StellarSdk.Memo.hash(digest))
@@ -50,6 +60,8 @@ async function anchorEvaluation(payload) {
     txid: result.hash,
     ledger: String(result.ledger ?? ''),
     network: 'stellar-testnet',
+    amount,
+    asset: 'XLM',
     memo_hash: digest.toString('hex'),
     payload_hash: digest.toString('hex'),
     payload_size: json.length,
