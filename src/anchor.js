@@ -35,6 +35,12 @@ const PRICE_XLM_FIXED = process.env.X402_PRICE_XLM ? Number(process.env.X402_PRI
 const MAX_RETRIES = Number(process.env.STELLAR_ANCHOR_MAX_RETRIES || 4);
 const RETRY_BACKOFF_MS = Number(process.env.STELLAR_ANCHOR_BACKOFF_MS || 250);
 
+// Async submit: don't wait for ledger close (~5s). Returns hash immediately
+// and the tx settles in the background. Reduces endpoint latency from ~5s → ~300ms,
+// which lifts Vercel function concurrent capacity from ~25 → 200+ requests/burst.
+// Set STELLAR_ANCHOR_SYNC=1 to fall back to legacy waiting submit.
+const USE_ASYNC_SUBMIT = process.env.STELLAR_ANCHOR_SYNC !== '1';
+
 async function resolveAnchorAmount(opts) {
   if (opts.amount != null) return String(opts.amount);
   if (PRICE_XLM_FIXED != null && Number.isFinite(PRICE_XLM_FIXED)) return String(PRICE_XLM_FIXED);
@@ -93,7 +99,35 @@ async function submitWithRetry({ payload, opts }) {
         .build();
 
       tx.sign(kp);
-      const result = await server.submitTransaction(tx);
+
+      // ── Async fast-path: submit + return hash without waiting for ledger close.
+      //   Stellar SDK 12+ exposes server.submitAsyncTransaction → /transactions_async on
+      //   Horizon. It returns immediately once the tx is queued for inclusion (~150ms),
+      //   instead of blocking 5s until the next ledger close. The tx still anchors
+      //   on-chain — we just don't wait around in the HTTP handler for the receipt.
+      let result;
+      if (USE_ASYNC_SUBMIT && typeof server.submitAsyncTransaction === 'function') {
+        const submitRes = await server.submitAsyncTransaction(tx);
+        // submitAsyncTransaction returns { hash, tx_status, ... } once accepted by Horizon.
+        // tx_status "PENDING" / "DUPLICATE" → considered successfully queued. Anything
+        // else (ERROR) is treated as a failed submit so the retry loop can recover.
+        const status = submitRes?.tx_status || submitRes?.txStatus || 'PENDING';
+        if (status === 'ERROR' || status === 'TRY_AGAIN_LATER') {
+          // Synthesize an error-shape so the retry/error path handles it like a sync submit.
+          const err = new Error(`async_submit_${status.toLowerCase()}`);
+          err.response = { status: 400, data: { extras: { result_codes: submitRes?.errorResult || {} } } };
+          throw err;
+        }
+        result = {
+          hash: submitRes.hash || tx.hash().toString('hex'),
+          ledger: null, // unknown until ledger closes
+          _async: true,
+          _submitStatus: status,
+        };
+      } else {
+        // Legacy sync path (forced via STELLAR_ANCHOR_SYNC=1 or SDK without async).
+        result = await server.submitTransaction(tx);
+      }
 
       return {
         result,
