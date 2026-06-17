@@ -11,7 +11,8 @@
     "evaluate": "node src/evaluate.js",
     "api": "node src/api.js",
     "genkey": "node scripts/genkey.js",
-    "channels": "node scripts/create-channels.js"
+    "channels": "node scripts/create-channels.js",
+    "loadtest": "node scripts/load-test.js"
   },
   "dependencies": {
     "@stellar/stellar-sdk": "^15.0.1",
