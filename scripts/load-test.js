@@ -23,7 +23,10 @@
  *   - attempts ≤ 2 on > 95 % of requests
  */
 
-const ENDPOINT_DEFAULT = 'https://www.erster.fund/api/x402/evaluate';
+// The website's "Run x402 Evaluation" button calls /api/evaluate (the
+// unpaid demo-anchor endpoint). The x402 endpoint just returns 402 metadata.
+// We target /api/evaluate to match what users actually hit.
+const ENDPOINT_DEFAULT = 'https://www.erster.fund/api/evaluate';
 const HORIZON = 'https://horizon-testnet.stellar.org';
 
 const args = Object.fromEntries(
@@ -107,16 +110,17 @@ async function step1Balances() {
 async function callOnce(label, i) {
   const t0 = Date.now();
   try {
+    // Mirror exactly what the website button sends — POST /api/evaluate with
+    // the demo payload. This is the call that actually triggers anchorEvaluation()
+    // and exercises the channel-account selection + retry path.
     const r = await fetch(ENDPOINT, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-PAYMENT': 'simulate-' + Math.random().toString(36).slice(2),
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         agentId: `agt_${label}_${i}`,
         score: 820,
         operation: 'transfer',
+        validatorIds: ['val-erster-01', 'val-tokenforge-02', 'val-test-03'],
       }),
     });
     const ms = Date.now() - t0;
