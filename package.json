@@ -10,7 +10,8 @@
     "fund": "node scripts/fund.js",
     "evaluate": "node src/evaluate.js",
     "api": "node src/api.js",
-    "genkey": "node scripts/genkey.js"
+    "genkey": "node scripts/genkey.js",
+    "channels": "node scripts/create-channels.js"
   },
   "dependencies": {
     "@stellar/stellar-sdk": "^15.0.1",

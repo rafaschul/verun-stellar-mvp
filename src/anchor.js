@@ -4,9 +4,16 @@
  * Produces a real Stellar Testnet TX with explorer link — an immutable,
  * timestamped audit anchor for every evaluation.
  *
- * The self-payment amount defaults to the x402 XLM price (0.005 XLM by default)
- * so the on-chain TX visibly reflects the evaluation price. Override via the
- * `amount` option or the `X402_PRICE_XLM` env var.
+ * High-throughput design:
+ *   - Anchor txs spread across N channel accounts (STELLAR_CHANNELS env)
+ *     → ~30-100 concurrent anchors without `tx_bad_seq` collisions.
+ *   - Per-submission retry-on-conflict with exponential backoff
+ *     → handles residual same-channel collisions safely.
+ *   - Falls back to single STELLAR_SECRET account if no channels configured.
+ *
+ * The self-payment amount defaults to market-rate XLM equivalent of $0.005 USD,
+ * so the on-chain TX visibly reflects the evaluation price.
+ * Override via the `amount` option or the `X402_PRICE_XLM` env var.
  */
 require('dotenv').config();
 const crypto = require('crypto');
@@ -14,59 +21,104 @@ const {
   StellarSdk,
   NETWORK_PASSPHRASE,
   getServer,
-  getKeypair,
   ensureFunded,
   explorerTx,
 } = require('./stellar');
+const { pickChannel, getChannelCount } = require('./channels');
 
-// Default anchor amount: market-rate XLM equivalent of $0.005 USD,
-// unless overridden by env (X402_PRICE_XLM) or opts.amount.
 const { convertUSDtoNative } = require('./priceOracle');
 const PRICE_USD = Number(process.env.X402_PRICE_USD || '0.005');
 const PRICE_XLM_FIXED = process.env.X402_PRICE_XLM ? Number(process.env.X402_PRICE_XLM) : null;
+
+// Retry config — handles residual sequence collisions when same channel
+// gets picked twice within ledger close time (~5s on Stellar).
+const MAX_RETRIES = Number(process.env.STELLAR_ANCHOR_MAX_RETRIES || 4);
+const RETRY_BACKOFF_MS = Number(process.env.STELLAR_ANCHOR_BACKOFF_MS || 250);
 
 async function resolveAnchorAmount(opts) {
   if (opts.amount != null) return String(opts.amount);
   if (PRICE_XLM_FIXED != null && Number.isFinite(PRICE_XLM_FIXED)) return String(PRICE_XLM_FIXED);
   const xlm = await convertUSDtoNative(PRICE_USD, 'XLM');
-  // Round to 7 decimals (Stellar stroop precision) and strip trailing zeros
   return parseFloat(xlm.toFixed(7)).toString();
 }
 
-async function anchorEvaluation(payload, opts = {}) {
+function isSequenceError(err) {
+  const codes = err?.response?.data?.extras?.result_codes;
+  if (!codes) return false;
+  return (
+    codes.transaction === 'tx_bad_seq' ||
+    (Array.isArray(codes.operations) && codes.operations.includes('op_bad_seq'))
+  );
+}
+
+function isRetryableError(err) {
+  if (isSequenceError(err)) return true;
+  const status = err?.response?.status;
+  // 429 (rate limited), 503/504 (server overload) — retry
+  if (status === 429 || status === 503 || status === 504) return true;
+  return false;
+}
+
+async function submitWithRetry({ payload, opts }) {
   const server = getServer();
-  const kp = getKeypair();
-  const pub = kp.publicKey();
-
-  // Auto-fund on first run (no-op if already funded)
-  await ensureFunded(pub);
-
-  const json = JSON.stringify(payload);
-  const digest = crypto.createHash('sha256').update(json).digest(); // 32 bytes
-  const account = await server.loadAccount(pub);
-
-  // Self-payment amount — defaults to market-rate XLM equivalent of $0.005 USD
-  // so the explorer visibly reflects the demo evaluation price.
   const amount = await resolveAnchorAmount(opts);
+  const json = JSON.stringify(payload);
+  const digest = crypto.createHash('sha256').update(json).digest();
 
-  const tx = new StellarSdk.TransactionBuilder(account, {
-    fee: StellarSdk.BASE_FEE,
-    networkPassphrase: NETWORK_PASSPHRASE,
-  })
-    .addOperation(
-      StellarSdk.Operation.payment({
-        destination: pub,
-        asset: StellarSdk.Asset.native(),
-        amount,
+  let lastError;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    // Pick a (potentially different) channel on each attempt to dodge collisions
+    const kp = pickChannel();
+    const pub = kp.publicKey();
+
+    try {
+      // Auto-fund first time we use a channel (idempotent)
+      if (attempt === 0) await ensureFunded(pub).catch(() => {});
+
+      const account = await server.loadAccount(pub);
+
+      const tx = new StellarSdk.TransactionBuilder(account, {
+        fee: StellarSdk.BASE_FEE,
+        networkPassphrase: NETWORK_PASSPHRASE,
       })
-    )
-    .addMemo(StellarSdk.Memo.hash(digest))
-    .setTimeout(60)
-    .build();
+        .addOperation(
+          StellarSdk.Operation.payment({
+            destination: pub,
+            asset: StellarSdk.Asset.native(),
+            amount,
+          })
+        )
+        .addMemo(StellarSdk.Memo.hash(digest))
+        .setTimeout(60)
+        .build();
 
-  tx.sign(kp);
+      tx.sign(kp);
+      const result = await server.submitTransaction(tx);
 
-  const result = await server.submitTransaction(tx);
+      return {
+        result,
+        amount,
+        digest,
+        json,
+        channel_used: pub,
+        attempts: attempt + 1,
+      };
+    } catch (e) {
+      lastError = e;
+      if (attempt >= MAX_RETRIES || !isRetryableError(e)) throw e;
+      // Exponential backoff with jitter
+      const backoff = RETRY_BACKOFF_MS * Math.pow(2, attempt) + Math.random() * 100;
+      await new Promise((r) => setTimeout(r, backoff));
+    }
+  }
+  throw lastError;
+}
+
+async function anchorEvaluation(payload, opts = {}) {
+  const { result, amount, digest, json, channel_used, attempts } = await submitWithRetry({
+    payload,
+    opts,
+  });
 
   return {
     txid: result.hash,
@@ -74,6 +126,9 @@ async function anchorEvaluation(payload, opts = {}) {
     network: 'stellar-testnet',
     amount,
     asset: 'XLM',
+    channel_used,
+    channels_total: getChannelCount(),
+    attempts,
     memo_hash: digest.toString('hex'),
     payload_hash: digest.toString('hex'),
     payload_size: json.length,
