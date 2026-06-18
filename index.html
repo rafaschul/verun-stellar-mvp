@@ -73,8 +73,8 @@ a{color:var(--teal);text-decoration:none}
 .hero{padding:80px 0 80px;position:relative;overflow:visible;background:var(--bg2);border-top:1px solid var(--border)}
 /* Mobile: tighter padding (background already grey from default) */
 @media(max-width:760px){.hero{padding:60px 0 60px !important}}
-/* Hide Demo section on mobile only (visible on tablet/desktop) */
-@media(max-width:760px){#demo{display:none !important}}
+/* Demo section hidden on all viewports (was: mobile only) */
+#demo{display:none !important}
 /* Phone overflows into next white section for visual depth */
 .hero-phone-wrap{margin-bottom:0}
 .hero-inner{position:relative;display:grid;grid-template-columns:0.95fr 1.05fr;grid-template-areas:"phone copy";align-items:center;gap:0;padding-bottom:0}
