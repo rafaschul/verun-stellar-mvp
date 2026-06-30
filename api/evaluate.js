@@ -4,6 +4,12 @@ const { anchorEvaluation } = require('../src/anchor');
 const safeJson = (obj) => JSON.parse(JSON.stringify(obj, (_k, v) => (typeof v === 'bigint' ? v.toString() : v)));
 
 module.exports = async function handler(req, res) {
+  // CORS — allow cross-origin calls (used by verun-bank-pitch and other deploys)
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-PAYMENT, x-payment');
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   try {
     const {
